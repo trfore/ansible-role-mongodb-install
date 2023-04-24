@@ -1,0 +1,37 @@
+name: ci_v4
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: [lint]
+    types: [completed]
+
+jobs:
+  v4_test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        distro: [centos8, debian10, ubuntu2004]
+        mongo_ver: ["4.4.19"]
+    env:
+      PY_COLORS: "1"
+      ANSIBLE_FORCE_COLOR: "1"
+      MOLECULE_IMAGE: trfore/docker-${{ matrix.distro }}-systemd
+      MOLECULE_NAME: ${{ matrix.distro }}
+    steps:
+      - name: Check out codebase
+        uses: actions/checkout@v3
+
+      - name: Setup python 3
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Test package install
+        run: mongo_ver=${{ matrix.mongo_ver }} molecule test
+
+      - name: Test tarfile install
+        run: mongo_ver=${{ matrix.mongo_ver }} molecule test -s install_tarball
