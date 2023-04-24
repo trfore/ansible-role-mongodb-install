@@ -3,7 +3,7 @@
   hosts: all
   vars:
     mongodb_pkg_install: true
-
+    mongodb_version: "{{ lookup('env', 'MONGODB_VERSION') }}"
   pre_tasks:
     - name: Update APT cache
       ansible.builtin.apt:

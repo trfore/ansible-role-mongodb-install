@@ -19,6 +19,8 @@ provisioner:
   name: ansible
   playbooks:
     converge: ${MOLECULE_PLAYBOOK:-converge.yml}
+  env:
+    MONGODB_VERSION: ${MOLECULE_MONGODB_VERSION:-"4.4.19"}
 verifier:
   name: testinfra
 scenario:

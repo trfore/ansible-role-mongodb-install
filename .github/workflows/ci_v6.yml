@@ -18,6 +18,7 @@ jobs:
       ANSIBLE_FORCE_COLOR: "1"
       MOLECULE_IMAGE: trfore/docker-${{ matrix.distro }}-systemd
       MOLECULE_NAME: ${{ matrix.distro }}
+      MOLECULE_MONGODB_VERSION: ${{ matrix.mongo_ver }}
     steps:
       - name: Check out codebase
         uses: actions/checkout@v3
@@ -31,7 +32,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Test package install
-        run: mongo_ver=${{ matrix.mongo_ver }} molecule test
+        run: molecule test
 
       - name: Test tarfile install
-        run: mongo_ver=${{ matrix.mongo_ver }} molecule test -s install_tarball
+        run: molecule test -s install_tarball

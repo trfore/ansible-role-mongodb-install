@@ -31,8 +31,8 @@ jobs:
                   declare "latest_v$maj"=$latest
 
                   # update workflow, default vars and readme files
-                  echo "updating workflow, default variables and README files to $latest"
-                  sed -i "s/$maj\.[0-9]\.[0-9][0-9]\?/$latest/" .github/workflows/ci_v"${maj}".yml ./defaults/main.yml README.md
+                  echo "updating workflow, molecule scenario, default variables and README files to $latest"
+                  sed -i "s/$maj\.[0-9]\.[0-9][0-9]\?/$latest/" .github/workflows/ci_v"${maj}".yml ./defaults/main.yml ./molecule/default/molecule.yml README.md
               fi
               unset latest current
           done
