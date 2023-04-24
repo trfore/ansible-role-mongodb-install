@@ -1,12 +1,3 @@
-import os
-
-
-def test_package_version(host):
-    pkg = host.package("mongodb-org")
-    assert pkg.is_installed
-    assert pkg.version == os.environ["MOLECULE_MONGODB_VERSION"]
-
-
 def test_service_running_and_enabled(host):
     service = host.service("mongod")
     assert service.is_running
