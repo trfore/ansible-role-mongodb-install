@@ -1,0 +1,5 @@
+# mongoDB download page url path value, e.g. "rhel80" for RHEL and CentOS 8
+- name: Set variable 'mongodb_os_distro' for RHEL
+  ansible.builtin.set_fact:
+    mongodb_os_distro: "rhel{{ ansible_distribution_major_version }}0"
+  when: ansible_os_family == 'RedHat'

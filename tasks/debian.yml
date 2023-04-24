@@ -1,0 +1,25 @@
+---
+- name: Install essential packages for HTTPS
+  ansible.builtin.apt:
+    update_cache: true
+    name:
+      - gnupg
+      - ca-certificates
+    state: present
+  register: apt_status
+  until: apt_status is success
+  delay: 10
+  retries: 6
+
+# mongoDB download page url path value, e.g. "ubuntu2004" and "debian10"
+- name: Set variable 'mongodb_os_distro' for Debian
+  ansible.builtin.set_fact:
+    mongodb_os_distro: "{{ ansible_distribution | lower }}{{ ansible_distribution_major_version }}"
+    mongodb_repository: "deb [ signed=/usr/share/keyrings/mongodb-server-{{ mongodb_version_maj_minor }}.gpg ] http://repo.mongodb.org/apt/debian {{ ansible_distribution_release }}/mongodb-org/{{ mongodb_version_maj_minor }} main"
+  when: ansible_distribution == 'Debian'
+
+- name: Set variable 'mongodb_os_distro' for Ubuntu
+  ansible.builtin.set_fact:
+    mongodb_os_distro: '{{ ansible_distribution | lower }}{{ ansible_distribution_version | regex_replace("[.]", "") }}'
+    mongodb_repository: "deb [ arch=amd64 signed=/usr/share/keyrings/mongodb-server-{{ mongodb_version_maj_minor }}.gpg ] https://repo.mongodb.org/apt/ubuntu {{ ansible_distribution_release }}/mongodb-org/{{ mongodb_version_maj_minor }} multiverse"
+  when: ansible_distribution == 'Ubuntu'

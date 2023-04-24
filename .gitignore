@@ -1,0 +1,13 @@
+# ansible
+*.retry
+*/__pycache__
+*.pyc
+.cache
+
+# ansible extras - typical development
+*.deb
+*.tgz
+*.tar.gz*
+
+# general extras
+.DS_Store

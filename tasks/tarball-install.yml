@@ -1,0 +1,51 @@
+---
+- name: Download and extract MongoDB tarfile
+  ansible.builtin.unarchive:
+    src: "{{ mongodb_tar_src }}"
+    dest: "{{ mongodb_path_exec }}"
+    remote_src: "{{ mongodb_tar_src_remote }}"
+    owner: root
+    group: root
+    mode: 0755
+    extra_opts:
+      - --strip-components=2
+      - --exclude=install_compass
+  notify: Enable MongoDB
+
+- name: Create MongoDB user
+  ansible.builtin.user:
+    name: mongodb
+    comment: "MongoDB service account"
+    system: true
+    shell: /usr/sbin/nologin
+    create_home: false
+    state: present
+
+- name: Create MongoDB directories
+  ansible.builtin.file:
+    path: "{{ mongodb_path }}"
+    state: directory
+    mode: "0755"
+    owner: mongodb
+    group: mongodb
+  loop:
+    - "{{ mongodb_path_db }}"
+    - "{{ mongodb_path_log }}"
+  loop_control:
+    loop_var: mongodb_path
+
+- name: Create MongoDB config
+  ansible.builtin.template:
+    src: mongod.conf.j2
+    dest: /etc/mongod.conf
+    mode: "0644"
+    owner: root
+    group: root
+
+- name: Create MongoDB service
+  ansible.builtin.template:
+    src: mongod.service.j2
+    dest: /lib/systemd/system/mongod.service
+    mode: "0644"
+    owner: root
+    group: root

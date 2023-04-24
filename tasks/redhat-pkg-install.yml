@@ -1,0 +1,32 @@
+---
+- name: Add MongoDB repository
+  ansible.builtin.yum_repository:
+    name: "mongodb-org-{{ mongodb_version_maj_minor }}"
+    description: MongoDB Repository
+    baseurl: "https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/{{ mongodb_version_maj_minor }}/x86_64/"
+    gpgcheck: true
+    enabled: true
+    gpgkey: "{{ mongodb_gpg_key }}"
+    state: present
+
+- name: Install MongoDB
+  ansible.builtin.dnf:
+    update_cache: true
+    name: mongodb-org-{{ mongodb_version }}*
+    state: present
+  register: mongodb_pkg_install
+  notify: Enable MongoDB
+
+- name: Install yum-versionlock
+  ansible.builtin.dnf:
+    name: python3-dnf-plugin-versionlock
+    state: present
+  when: mongodb_pkg_hold
+
+- name: Hold MongoDB packages
+  community.general.yum_versionlock:
+    name: "{{ mongodb_pkg_hold_list }}"
+    state: present
+  when:
+    - mongodb_pkg_hold
+    - mongodb_pkg_install is succeeded

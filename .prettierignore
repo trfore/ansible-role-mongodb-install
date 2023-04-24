@@ -1,0 +1,4 @@
+# linted by yamllint
+*.yaml
+*.yml
+.pylintrc

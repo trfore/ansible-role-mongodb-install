@@ -1,0 +1,8 @@
+---
+# tarball install variables
+mongodb_path_db: /var/lib/mongod
+mongodb_path_log: /var/log/mongodb
+mongodb_dependencies:
+  - libcurl4
+  - openssl
+  - liblzma5
