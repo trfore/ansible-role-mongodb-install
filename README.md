@@ -1,7 +1,7 @@
 # Ansible Role: MongoDB
 
-[![ci_v4](https://github.com/trfore/ansible-role-mongodb-install/actions/workflows/ci_v4.yml/badge.svg?branch=main)](https://github.com/trfore/ansible-role-mongodb-install/actions/workflows/ci_v4.yml)
-[![cd](https://github.com/trfore/ansible-role-mongodb-install/actions/workflows/cd.yml/badge.svg?branch=main)](https://github.com/trfore/ansible-role-mongodb-install/actions/workflows/cd.yml)
+[![CI](https://github.com/trfore/ansible-role-mongodb-install/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/trfore/ansible-role-mongodb-install/actions/workflows/ci.yml)
+[![CD](https://github.com/trfore/ansible-role-mongodb-install/actions/workflows/cd.yml/badge.svg?branch=main)](https://github.com/trfore/ansible-role-mongodb-install/actions/workflows/cd.yml)
 
 This role installs the MongoDB Community edition server metapackage, `mongodb-org`, via the OS's package manager (default) or the server binaries via tar file. It currently defaults to installing the **latest release from version 4**, you can install a newer major version by setting `mongodb_version: 6.0.5`, see 'Tested Platforms and Versions' section for a compatibility matrix.
 
@@ -32,21 +32,18 @@ roles:
 
 ### MongoDB Community `6.0.5`
 
-- [![ci_v6](https://github.com/trfore/ansible-role-mongodb-install/actions/workflows/ci_v6.yml/badge.svg?branch=main)](https://github.com/trfore/ansible-role-mongodb-install/actions/workflows/ci_v6.yml)
 - CentOS Stream 8
 - Debian 10 & 11
 - Ubuntu 20.04 & 22.04
 
 ### MongoDB Community `5.0.15`
 
-- [![ci_v5](https://github.com/trfore/ansible-role-mongodb-install/actions/workflows/ci_v5.yml/badge.svg?branch=main)](https://github.com/trfore/ansible-role-mongodb-install/actions/workflows/ci_v5.yml)
 - CentOS Stream 8
 - Debian 10 & 11
 - Ubuntu 20.04
 
 ### MongoDB Community `4.4.19`
 
-- [![ci_v4](https://github.com/trfore/ansible-role-mongodb-install/actions/workflows/ci_v4.yml/badge.svg?branch=main)](https://github.com/trfore/ansible-role-mongodb-install/actions/workflows/ci_v4.yml)
 - CentOS Stream 8
 - Debian 10
 - Ubuntu 20.04
