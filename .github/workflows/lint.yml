@@ -1,12 +1,8 @@
-name: lint
+name: Lint
 on:
+  workflow_call:
   workflow_dispatch:
   push:
-    branches: ["*"]
-    paths-ignore:
-      - "LICENSE"
-      - "README.md"
-  pull_request:
     branches: ["*"]
     paths-ignore:
       - "LICENSE"
@@ -29,4 +25,4 @@ jobs:
         run: ansible-lint .
 
       - name: Lint using pylint
-        run: pylint $(git ls-files '*.py') --disable=C0114
+        run: pylint $(git ls-files '*.py') --disable=C0114,C0301

@@ -1,0 +1,61 @@
+name: CI
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: ["*"]
+    paths-ignore:
+      - "LICENSE"
+      - "README.md"
+
+jobs:
+  lint:
+    uses: ./.github/workflows/lint.yml
+
+  v4_test:
+    needs: lint
+    strategy:
+      fail-fast: false
+      matrix:
+        distro: [centos8, debian10, ubuntu2004]
+        version: ["4.4.19"]
+        molecule_scenario: ["-s default", "-s install_tarball"]
+    uses: ./.github/workflows/test.yml
+    with:
+      distro: ${{ matrix.distro }}
+      version: ${{ matrix.version }}
+      molecule_scenario: ${{ matrix.molecule_scenario }}
+
+  v5_test:
+    needs: lint
+    strategy:
+      fail-fast: false
+      matrix:
+        distro: [centos8, debian10, debian11, ubuntu2004]
+        version: ["5.0.15"]
+        molecule_scenario: ["-s default", "-s install_tarball"]
+    uses: ./.github/workflows/test.yml
+    with:
+      distro: ${{ matrix.distro }}
+      version: ${{ matrix.version }}
+      molecule_scenario: ${{ matrix.molecule_scenario }}
+
+  v6_test:
+    needs: lint
+    strategy:
+      fail-fast: false
+      matrix:
+        distro: [centos8, debian10, debian11, ubuntu2004]
+        version: ["6.0.5"]
+        experimental: [false]
+        molecule_scenario: ["-s default", "-s install_tarball"]
+        include:
+          - distro: ubuntu2204
+            version: "6.0.5"
+            experimental: true
+            molecule_scenario: ["-s default", "-s install_tarball"]
+    uses: ./.github/workflows/test.yml
+    with:
+      distro: ${{ matrix.distro }}
+      version: ${{ matrix.version }}
+      experimental: ${{ matrix.experimental }}
+      molecule_scenario: ${{ matrix.molecule_scenario }}

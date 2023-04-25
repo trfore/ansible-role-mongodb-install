@@ -1,11 +1,14 @@
-name: bot auto-approve and merge
+name: Bot Auto-Approve and Merge
 on: pull_request
+
 permissions:
   contents: write
   pull-requests: write
+
 env:
   PR_URL: ${{ github.event.pull_request.html_url }}
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 jobs:
   merge_pr:
     runs-on: ubuntu-latest
