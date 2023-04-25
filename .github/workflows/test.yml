@@ -1,0 +1,43 @@
+name: Test
+on:
+  workflow_call:
+    inputs:
+      distro:
+        required: true
+        type: string
+      version:
+        required: true
+        type: string
+      experimental:
+        default: false
+        required: false
+        type: boolean
+      molecule_scenario:
+        default: "" # ex: "-s SCENARIO_NAME"
+        required: false
+        type: string
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    continue-on-error: ${{ inputs.experimental }}
+    env:
+      PY_COLORS: "1"
+      ANSIBLE_FORCE_COLOR: "1"
+      MOLECULE_IMAGE: trfore/docker-${{ inputs.distro }}-systemd
+      MOLECULE_NAME: ${{ inputs.distro }}
+      MOLECULE_MONGODB_VERSION: ${{ inputs.version }}
+    steps:
+      - name: Check out codebase
+        uses: actions/checkout@v3
+
+      - name: Setup python 3
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Test package install
+        run: molecule test ${{ inputs.molecule_scenario }}

@@ -1,0 +1,26 @@
+name: Deploy to Ansible Galaxy
+on:
+  workflow_call:
+    secrets:
+      API_KEY:
+        required: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out codebase
+        uses: actions/checkout@v3
+
+      - name: Setup python 3
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Import role into galaxy
+        run: >-
+          ansible-galaxy role import --api-key ${{ secrets.API_KEY }}
+          $(echo ${{ github.repository }} | cut -d/ -f1) $(echo ${{ github.repository }} | cut -d/ -f2)

@@ -1,8 +1,9 @@
-name: update mongodb version
+name: Update MongoDB Version
 on:
   workflow_dispatch:
   schedule:
     - cron: "0 2 * * 1,3,5"
+
 jobs:
   update_mongodb:
     runs-on: ubuntu-20.04
