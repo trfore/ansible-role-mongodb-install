@@ -110,7 +110,11 @@ OS specific variables are listed below, along with default values:
 
 ## Dependencies
 
-None
+- `community.general.yum_versionlock` (for CentOS & RHEL target host)
+
+  ```bash
+  ansible-galaxy collection install community.general
+  ```
 
 ## Example Playbooks
 
