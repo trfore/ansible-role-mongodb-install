@@ -17,7 +17,7 @@ See 'Example Playbooks' section for working examples. This role **does not confi
 You can install this role with the Ansible Galaxy CLI:
 
 ```bash
-ansible-galaxy role install trfore.mongodb
+ansible-galaxy install trfore.mongodb_install
 ```
 
 You can also include it in a `requirements.yml` file and install it with `ansible-galaxy role install -r requirements.yml`, using the format:
@@ -25,7 +25,7 @@ You can also include it in a `requirements.yml` file and install it with `ansibl
 ```yaml
 ---
 roles:
-  - trfore.mongodb
+  - trfore.mongodb_install
 ```
 
 ## Tested Platforms and Versions
@@ -120,7 +120,7 @@ None
 - hosts: servers
   roles:
     - name: Install MongoDB
-      role: trfore.mongodb
+      role: trfore.mongodb_install
 ```
 
 ```yaml
@@ -130,7 +130,7 @@ None
     mongodb_version: '6.0.5'
   roles:
     - name: Install MongoDB
-      role: trfore.mongodb
+      role: trfore.mongodb_install
 ```
 
 - Binary install from tar file.
@@ -142,7 +142,7 @@ None
     mongodb_version: '6.0.5'
   roles:
     - name: Install MongoDB
-      role: trfore.mongodb
+      role: trfore.mongodb_install
 ```
 
 - Binary install from tar file, if you manually download the tarball to your control host.
@@ -155,7 +155,7 @@ None
     mongodb_tar_src_remote: false
   roles:
     - name: Install MongoDB
-      role: trfore.mongodb
+      role: trfore.mongodb_install
 ```
 
 ## License
