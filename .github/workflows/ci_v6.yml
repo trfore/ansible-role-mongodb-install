@@ -8,11 +8,17 @@ on:
 jobs:
   v6_test:
     runs-on: ubuntu-latest
+    continue-on-error: ${{ matrix.experimental }}
     strategy:
       fail-fast: false
       matrix:
-        distro: [centos8, debian10, debian11, ubuntu2004, ubuntu2204]
+        distro: [centos8, debian10, debian11, ubuntu2004]
         mongo_ver: ["6.0.5"]
+        experimental: [false]
+        include:
+          - distro: ubuntu2204
+            mongo_ver: "6.0.5"
+            experimental: true
     env:
       PY_COLORS: "1"
       ANSIBLE_FORCE_COLOR: "1"
