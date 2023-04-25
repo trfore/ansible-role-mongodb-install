@@ -25,19 +25,24 @@ verifier:
   name: testinfra
 scenario:
   create_sequence:
+    - dependency
     - create
   check_sequence:
+    - dependency
     - destroy
     - create
     - converge
     - check
     - destroy
   converge_sequence:
+    - dependency
     - create
     - converge
   destroy_sequence:
+    - dependency
     - destroy
   test_sequence:
+    - dependency
     - destroy
     - syntax
     - create
