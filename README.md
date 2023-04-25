@@ -36,13 +36,13 @@ roles:
 - Debian 10 & 11
 - Ubuntu 20.04 & 22.04
 
-### MongoDB Community `5.0.15`
+### MongoDB Community `5.0.17`
 
 - CentOS Stream 8
 - Debian 10 & 11
 - Ubuntu 20.04
 
-### MongoDB Community `4.4.19`
+### MongoDB Community `4.4.21`
 
 - CentOS Stream 8
 - Debian 10
@@ -64,7 +64,7 @@ Common variables are listed below, along with default values (see `defaults/main
 | Variable                  | Default   | Description                                            | Required  |
 | ------------------------- | --------- | ------------------------------------------------------ | --------- |
 | mongodb_pkg_install       | `true`    | Boolean, `true` to install MongoDB via package manager | No        |
-| mongodb_version           | `4.4.19`  | MongoDB Community stable releases `v4.4`, `v5`, `v6`   | Yes       |
+| mongodb_version           | `4.4.21`  | MongoDB Community stable releases `v4.4`, `v5`, `v6`   | Yes       |
 | mongodb_version_maj_minor | Automatic | Extracts major and minor values from `mongodb_version` | Automatic |
 
 ### Package Install Variables
@@ -152,7 +152,7 @@ OS specific variables are listed below, along with default values:
 - hosts: servers
   vars:
     mongodb_pkg_install: false
-    mongodb_tar_src: mongodb-linux-x86_64-debian10-4.4.19.tgz
+    mongodb_tar_src: mongodb-linux-x86_64-debian10-4.4.21.tgz
     mongodb_tar_src_remote: false
   roles:
     - name: Install MongoDB
