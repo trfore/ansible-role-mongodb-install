@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       manual_deploy:
-        description: "manually deploy to ansible galaxy"
+        description: "deploy to ansible galaxy"
         default: false
         required: true
         type: boolean
