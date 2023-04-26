@@ -1,6 +1,12 @@
 name: CD
 on:
   workflow_dispatch:
+    inputs:
+      manual_deploy:
+        description: "manually deploy to ansible galaxy"
+        default: false
+        required: true
+        type: boolean
   pull_request:
     branches: [main]
     types: [closed]
@@ -10,7 +16,7 @@ on:
 
 jobs:
   deploy:
-    if: github.event.pull_request.merged == true
+    if: github.event.pull_request.merged == true || inputs.manual_deploy == true
     uses: ./.github/workflows/deploy.yml
     secrets:
       API_KEY: ${{ secrets.GALAXY_API_KEY }}
