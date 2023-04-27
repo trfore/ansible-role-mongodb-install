@@ -16,7 +16,7 @@ on:
 
 jobs:
   deploy:
-    if: github.event.pull_request.merged == true || inputs.manual_deploy == true
+    if: ${{ github.event.pull_request.merged == true || inputs.manual_deploy == true }}
     uses: ./.github/workflows/deploy.yml
     secrets:
       API_KEY: ${{ secrets.GALAXY_API_KEY }}
