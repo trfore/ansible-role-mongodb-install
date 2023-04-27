@@ -1,6 +1,5 @@
 name: Lint
 on:
-  workflow_call:
   workflow_dispatch:
   push:
     branches: ["*"]
@@ -9,20 +8,8 @@ on:
       - "README.md"
 
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out codebase
-        uses: actions/checkout@v3
+  lint_ansible:
+    uses: trfore/ansible-role/.github/workflows/lint_ansible.yml@main # remote repo
 
-      - name: Install dependencies
-        run: pip install ansible-lint pylint
-
-      - name: Lint using yamllint
-        run: yamllint .
-
-      - name: Lint using ansible-lint
-        run: ansible-lint .
-
-      - name: Lint using pylint
-        run: pylint $(git ls-files '*.py') --disable=C0114,C0301
+  lint_python:
+    uses: trfore/ansible-role/.github/workflows/lint_py.yml@main # remote repo

@@ -3,17 +3,21 @@ on:
   workflow_dispatch:
   pull_request:
     branches: ["*"]
-    types: [opened]
     paths-ignore:
       - "LICENSE"
       - "README.md"
 
 jobs:
-  lint:
-    uses: ./.github/workflows/lint.yml
+  lint_ansible:
+    uses: trfore/ansible-role/.github/workflows/lint_ansible.yml@main # remote repo
+
+  lint_python:
+    uses: trfore/ansible-role/.github/workflows/lint_py.yml@main # remote repo
 
   v4_test:
-    needs: lint
+    needs:
+      - lint_ansible
+      - lint_python
     strategy:
       fail-fast: false
       matrix:
@@ -27,7 +31,9 @@ jobs:
       molecule_scenario: ${{ matrix.molecule_scenario }}
 
   v5_test:
-    needs: lint
+    needs:
+      - lint_ansible
+      - lint_python
     strategy:
       fail-fast: false
       matrix:
@@ -41,7 +47,9 @@ jobs:
       molecule_scenario: ${{ matrix.molecule_scenario }}
 
   v6_test:
-    needs: lint
+    needs:
+      - lint_ansible
+      - lint_python
     strategy:
       fail-fast: false
       matrix:
