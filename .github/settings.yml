@@ -1,0 +1,5 @@
+---
+repository:
+  description: Ansible role for installing MongoDB Community Edition on RedHat/CentOS and Debian/Ubuntu
+  homepage: https://galaxy.ansible.com/trfore/mongodb_install
+  topics: ansible-role, homelab, mongo-db, mongodb-database
