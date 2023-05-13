@@ -3,7 +3,7 @@
 [![CI](https://github.com/trfore/ansible-role-mongodb-install/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/trfore/ansible-role-mongodb-install/actions/workflows/ci.yml)
 [![CD](https://github.com/trfore/ansible-role-mongodb-install/actions/workflows/cd.yml/badge.svg?branch=main)](https://github.com/trfore/ansible-role-mongodb-install/actions/workflows/cd.yml)
 
-This role installs the MongoDB Community edition server metapackage, `mongodb-org`, via the OS's package manager (default) or the server binaries via tar file. It currently defaults to installing the **latest release from version 4**, you can install a newer major version by setting `mongodb_version: 6.0.5`, see 'Tested Platforms and Versions' section for a compatibility matrix.
+This role installs the MongoDB Community edition server metapackage, `mongodb-org`, via the OS's package manager (default) or the server binaries via tar file. It currently defaults to installing the **latest release from version 4**, you can install a newer major version by setting `mongodb_version: 6.0.6`, see 'Tested Platforms and Versions' section for a compatibility matrix.
 
 Alternatively, you can install the MongoDB server binaries - `mongo`, `mongod`, `mongos`, by setting `mongodb_pkg_install: false` and the role will download the **latest tarball from version 4** or a newer major version by setting `mongodb_version`. If you would like to install the binary from your local Ansible control host, download the appropriate tar file, `mongodb-linux-x86_64-{DISTRO}-{VERSION}.tgz`, to your `files` directory and set the following two variables in your playbook:
 
@@ -30,7 +30,7 @@ roles:
 
 ## Tested Platforms and Versions
 
-### MongoDB Community `6.0.5`
+### MongoDB Community `6.0.6`
 
 - CentOS Stream 8
 - Debian 10 & 11
@@ -130,7 +130,7 @@ OS specific variables are listed below, along with default values:
   become: true
   vars:
     mongodb_pkg_install: true
-    mongodb_version: '6.0.5'
+    mongodb_version: '6.0.6'
   roles:
     - name: Install MongoDB
       role: trfore.mongodb_install
@@ -143,7 +143,7 @@ OS specific variables are listed below, along with default values:
   become: true
   vars:
     mongodb_pkg_install: false
-    mongodb_version: '6.0.5'
+    mongodb_version: '6.0.6'
   roles:
     - name: Install MongoDB
       role: trfore.mongodb_install
