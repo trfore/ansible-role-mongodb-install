@@ -72,3 +72,18 @@ jobs:
       version: ${{ matrix.version }}
       experimental: ${{ matrix.experimental }}
       molecule_scenario: ${{ matrix.molecule_scenario }}
+
+  build_results:
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    needs:
+      - v4_test
+      - v5_test
+      - v6_test
+    steps:
+      - name: All builds passed
+        if: ${{ !(contains(needs.*.result, 'failure')) }}
+        run: exit 0
+      - name: One or more builds failed
+        if: ${{ contains(needs.*.result, 'failure') }}
+        run: exit 1
