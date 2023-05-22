@@ -56,7 +56,6 @@ jobs:
 
       - name: Create pull request
         if: env.UPDATE_VERSION_FILE
-        id: pr
         uses: peter-evans/create-pull-request@v5
         with:
           token: ${{ secrets.WORKFLOW_TOKEN }}
@@ -72,9 +71,3 @@ jobs:
             [2]: https://github.com/peter-evans/create-pull-request
           labels: dependencies, status/auto-created
           branch: update-mongodb-ver
-
-      - name: Enable Pull Request Automerge
-        if: steps.pr.outputs.pull-request-operation == 'created'
-        run: gh pr merge --merge --auto
-        env:
-          GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
