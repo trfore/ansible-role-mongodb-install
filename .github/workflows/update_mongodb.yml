@@ -2,7 +2,7 @@ name: Update MongoDB Version
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 2 * * 2,6"
+    - cron: '0 2 * * 2,6'
 
 jobs:
   update_mongodb:
@@ -75,6 +75,6 @@ jobs:
 
       - name: Enable Pull Request Automerge
         if: steps.pr.outputs.pull-request-operation == 'created'
-        run: gh pr merge --merge --auto "1"
+        run: gh pr merge --merge --auto
         env:
-          token: ${{ secrets.WORKFLOW_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
