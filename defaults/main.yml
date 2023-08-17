@@ -1,21 +1,14 @@
 ---
 mongodb_pkg_install: true # false = install from tarball
-mongodb_version: "4.4.23"
+mongodb_version: '4.4.23'
+mongodb_version_maj: '{{ mongodb_version | regex_search("^\d") }}'
 mongodb_version_maj_minor: '{{ mongodb_version | regex_search("^\d.\d") }}'
 
 # package install variables
-mongodb_gpg_key: "https://pgp.mongodb.com/server-{{ mongodb_version_maj_minor }}.asc"
+mongodb_gpg_key: 'https://pgp.mongodb.com/server-{{ mongodb_version_maj_minor }}.asc'
 mongodb_pkg_hold: true
-mongodb_pkg_hold_list:
-  - mongodb-org
-  - mongodb-org-server
-  - mongodb-org-shell
-  - mongodb-org-mongos
-  - mongodb-org-tools
-  - mongodb-org-database
-  - mongodb-mongosh
 
 # tarball install variables
 mongodb_path_exec: /usr/bin
-mongodb_tar_src: "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-{{ mongodb_os_distro }}-{{ mongodb_version }}.tgz" # mongodb_os_distro is set within an OS specific task file.
+mongodb_tar_src: 'https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-{{ mongodb_os_distro }}-{{ mongodb_version }}.tgz' # mongodb_os_distro is set within an OS specific task file.
 mongodb_tar_src_remote: true
