@@ -65,6 +65,7 @@ Common variables are listed below, along with default values (see `defaults/main
 | ------------------------- | --------- | ------------------------------------------------------ | --------- |
 | mongodb_pkg_install       | `true`    | Boolean, `true` to install MongoDB via package manager | No        |
 | mongodb_version           | `4.4.23`  | MongoDB Community stable releases `v4.4`, `v5`, `v6`   | Yes       |
+| mongodb_version_maj       | Automatic | Extracts major value from `mongodb_version`            | Automatic |
 | mongodb_version_maj_minor | Automatic | Extracts major and minor values from `mongodb_version` | Automatic |
 
 ### Package Install Variables
@@ -87,23 +88,25 @@ Common variables are listed below, along with default values (see `defaults/main
 | mongodb_tar_src_remote | `true`     | Boolean, `true` if downloading from URL (tar install)                 | No       |
 | mongodb_path_exec      | `/usr/bin` | PATH, MongoDB binary path (tar install)                               | No       |
 
-OS specific variables are listed below, along with default values:
+### Other OS Specific Variables
 
 `vars/debian.yml`:
 
-| Variable             | Default                             | Description                                 | Required |
-| -------------------- | ----------------------------------- | ------------------------------------------- | -------- |
-| mongodb_path_db      | `/var/lib/mongodb`                  | PATH, MongoDB database folder (tar install) | No       |
-| mongodb_path_log     | `/var/log/mongodb`                  | PATH, MongoDB log folder (tar install)      | No       |
-| mongodb_dependencies | `["libcurl4","openssl","liblzma5"]` | Required packages for MongoDB (tar install) | No       |
+| Variable              | Default                             | Description                                                         | Required |
+| --------------------- | ----------------------------------- | ------------------------------------------------------------------- | -------- |
+| mongodb_path_db       | `/var/lib/mongodb`                  | PATH, MongoDB database folder (tar install)                         | No       |
+| mongodb_path_log      | `/var/log/mongodb`                  | PATH, MongoDB log folder (tar install)                              | No       |
+| mongodb_dependencies  | `["libcurl4","openssl","liblzma5"]` | Required packages for MongoDB (tar install)                         | No       |
+| mongodb_pkg_hold_list | MongoDB Packages                    | List of MongoDB packages installed from `mongodb-org` (pkg install) | No       |
 
-`vars/redhat.yml`:
+`vars/redhat.yml` and `vars/redhat_mongo_v{4-6}.yml`:
 
-| Variable             | Default                                   | Description                                 | Required |
-| -------------------- | ----------------------------------------- | ------------------------------------------- | -------- |
-| mongodb_path_db      | `/var/lib/mongo`                          | PATH, MongoDB database folder (tar install) | No       |
-| mongodb_path_log     | `/var/log/mongodb`                        | PATH, MongoDB log folder (tar install)      | No       |
-| mongodb_dependencies | `["libcurl-minimal","openssl","xz-libs"]` | Required packages for MongoDB (tar install) | No       |
+| Variable              | Default                                   | Description                                                         | Required |
+| --------------------- | ----------------------------------------- | ------------------------------------------------------------------- | -------- |
+| mongodb_path_db       | `/var/lib/mongo`                          | PATH, MongoDB database folder (tar install)                         | No       |
+| mongodb_path_log      | `/var/log/mongodb`                        | PATH, MongoDB log folder (tar install)                              | No       |
+| mongodb_dependencies  | `["libcurl-minimal","openssl","xz-libs"]` | Required packages for MongoDB (tar install)                         | No       |
+| mongodb_pkg_hold_list | MongoDB Packages                          | List of MongoDB packages installed from `mongodb-org` (pkg install) | No       |
 
 ## Dependencies
 

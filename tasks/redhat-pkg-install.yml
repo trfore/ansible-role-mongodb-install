@@ -23,6 +23,10 @@
     state: present
   when: mongodb_pkg_hold
 
+- name: Load MongoDB package hold list
+  ansible.builtin.include_vars: 'redhat_mongo_v{{ mongodb_version_maj }}.yml'
+  when: mongodb_pkg_hold
+
 - name: Hold MongoDB packages
   community.general.yum_versionlock:
     name: '{{ mongodb_pkg_hold_list }}'

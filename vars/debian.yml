@@ -6,3 +6,11 @@ mongodb_dependencies:
   - libcurl4
   - openssl
   - liblzma5
+mongodb_pkg_hold_list:
+  - mongodb-org
+  - mongodb-org-server
+  - mongodb-org-shell
+  - mongodb-org-mongos
+  - mongodb-org-tools
+  - mongodb-org-database
+  - mongodb-mongosh
