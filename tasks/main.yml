@@ -1,15 +1,15 @@
 ---
 - name: Install essential packages and set OS specific variables
-  ansible.builtin.include_tasks: "{{ ansible_os_family | lower }}.yml"
+  ansible.builtin.include_tasks: '{{ ansible_os_family | lower }}.yml'
 
 - name: Load OS specific variables
-  ansible.builtin.include_vars: "{{ ansible_os_family | lower }}.yml"
+  ansible.builtin.include_vars: '{{ ansible_os_family | lower }}.yml'
 
 - name: Install MongoDB dependencies
   ansible.builtin.package:
-    name: "{{ mongodb_dep_pkg }}"
+    name: '{{ mongodb_dep_pkg }}'
     state: present
-  loop: "{{ mongodb_dependencies }}"
+  loop: '{{ mongodb_dependencies }}'
   loop_control:
     loop_var: mongodb_dep_pkg
   register: package_status
@@ -20,8 +20,8 @@
 - name: Verify that required string variables are defined
   ansible.builtin.assert:
     that: mongodb_req_var is defined and mongodb_req_var | length > 0 and mongodb_req_var != None
-    fail_msg: " needs to be set for the role to work"
-    success_msg: "required variable is defined"
+    fail_msg: ' needs to be set for the role to work'
+    success_msg: 'required variable is defined'
   loop:
     - mongodb_version
     - mongodb_os_distro
@@ -35,13 +35,13 @@
   changed_when: mongodb_local_binary.rc
 
 - name: Install MongoDB via package manager
-  ansible.builtin.include_tasks: "{{ ansible_os_family | lower }}-pkg-install.yml"
+  ansible.builtin.include_tasks: '{{ ansible_os_family | lower }}-pkg-install.yml'
   when:
     - mongodb_pkg_install
     - mongodb_local_binary.rc != 0
 
 - name: Install MongoDB via tarball
-  ansible.builtin.include_tasks: "tarball-install.yml"
+  ansible.builtin.include_tasks: 'tarball-install.yml'
   when:
     - not mongodb_pkg_install
     - mongodb_local_binary.rc != 0

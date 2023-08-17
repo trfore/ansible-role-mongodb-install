@@ -32,7 +32,7 @@ A clear and concise description of what you expected to happen.
 
 ### Your environment
 
-- Version of Ansible (`ansible --version`):
+- Version of Ansible, Molecule, and Python (Please paste the output from `ansible --version && molecule --version && python --version`):
 - Version of Jinja2:
 - Control node OS (e.g. Ubuntu 20.04, `cat /etc/os-release`):
 - Target node OS:
