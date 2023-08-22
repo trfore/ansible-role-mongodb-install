@@ -1,6 +1,6 @@
 ansible>=7.4
 ansible-compat>=4.1.7
-ansible-core==2.15.2
+ansible-core==2.15.3
 ansible-lint>=6.14.0
 molecule==6.0.1
 molecule-plugins[docker]>=23.0.0
