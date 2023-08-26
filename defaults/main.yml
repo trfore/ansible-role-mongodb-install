@@ -1,6 +1,6 @@
 ---
 mongodb_pkg_install: true # false = install from tarball
-mongodb_version: '4.4.23'
+mongodb_version: '4.4.24'
 mongodb_version_maj: '{{ mongodb_version | regex_search("^\d") }}'
 mongodb_version_maj_minor: '{{ mongodb_version | regex_search("^\d.\d") }}'
 
