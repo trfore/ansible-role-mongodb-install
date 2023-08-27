@@ -22,7 +22,7 @@ jobs:
       fail-fast: false
       matrix:
         distro: [centos8, debian10, ubuntu2004]
-        version: ["4.4.23"]
+        version: ["4.4.24"]
         molecule_scenario: ["-s default", "-s install_tarball"]
     uses: ./.github/workflows/test.yml
     with:
