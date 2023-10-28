@@ -36,7 +36,7 @@ roles:
 - Debian 10 & 11
 - Ubuntu 20.04 & 22.04
 
-### MongoDB Community `5.0.21`
+### MongoDB Community `5.0.22`
 
 - CentOS Stream 8
 - Debian 10 & 11
