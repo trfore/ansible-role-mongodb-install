@@ -64,7 +64,7 @@ Common variables are listed below, along with default values (see `defaults/main
 | Variable                  | Default   | Description                                            | Required  |
 | ------------------------- | --------- | ------------------------------------------------------ | --------- |
 | mongodb_pkg_install       | `true`    | Boolean, `true` to install MongoDB via package manager | No        |
-| mongodb_version           | `4.4.25`  | MongoDB Community stable releases `v4.4`, `v5`, `v6`   | Yes       |
+| mongodb_version           | `4.4.25`  | MongoDB Community stable releases `v4.4`, `v5`, `v6`   | No        |
 | mongodb_version_maj       | Automatic | Extracts major value from `mongodb_version`            | Automatic |
 | mongodb_version_maj_minor | Automatic | Extracts major and minor values from `mongodb_version` | Automatic |
 
@@ -133,7 +133,7 @@ Common variables are listed below, along with default values (see `defaults/main
   become: true
   vars:
     mongodb_pkg_install: true
-    mongodb_version: '6.0.11'
+    mongodb_version: "6.0.11"
   roles:
     - name: Install MongoDB
       role: trfore.mongodb_install
@@ -146,7 +146,7 @@ Common variables are listed below, along with default values (see `defaults/main
   become: true
   vars:
     mongodb_pkg_install: false
-    mongodb_version: '6.0.11'
+    mongodb_version: "6.0.11"
   roles:
     - name: Install MongoDB
       role: trfore.mongodb_install
