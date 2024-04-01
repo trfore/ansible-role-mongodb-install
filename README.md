@@ -133,7 +133,7 @@ Common variables are listed below, along with default values (see `defaults/main
   become: true
   vars:
     mongodb_pkg_install: true
-    mongodb_version: '6.0.14'
+    mongodb_version: "6.0.14"
   roles:
     - name: Install MongoDB
       role: trfore.mongodb_install
@@ -146,7 +146,7 @@ Common variables are listed below, along with default values (see `defaults/main
   become: true
   vars:
     mongodb_pkg_install: false
-    mongodb_version: '6.0.14'
+    mongodb_version: "6.0.14"
   roles:
     - name: Install MongoDB
       role: trfore.mongodb_install
