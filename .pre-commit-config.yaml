@@ -2,11 +2,21 @@ repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.4.0
     hooks:
-      - id: check-yaml
-        args: [--allow-multiple-documents]
+      - id: check-merge-conflict
+      - id: check-symlinks
+      - id: debug-statements
       - id: end-of-file-fixer
+      - id: no-commit-to-branch
+        args: [--branch, main]
       - id: trailing-whitespace
         args: [--markdown-linebreak-ext=md]
+      - id: check-yaml
+        args: [--allow-multiple-documents]
+
+  - repo: https://github.com/asottile/add-trailing-comma
+    rev: v3.0.0
+    hooks:
+      - id: add-trailing-comma
 
   - repo: https://github.com/adrienverge/yamllint
     rev: v1.31.0

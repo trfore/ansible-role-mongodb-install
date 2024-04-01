@@ -14,3 +14,5 @@ mongodb_pkg_hold_list:
   - mongodb-org-tools
   - mongodb-org-database
   - mongodb-mongosh
+  - mongodb-org-database-tools-extra
+  - mongodb-database-tools
