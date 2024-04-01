@@ -29,19 +29,18 @@
     loop_var: req_var
 
 - name: Check for mongod daemon
-  ansible.builtin.command: which mongod
-  ignore_errors: true
+  ansible.builtin.stat:
+    path: "{{ mongodb_path_exec }}/mongod"
   register: mongodb_local_binary
-  changed_when: mongodb_local_binary.rc
 
 - name: Install MongoDB via package manager
   ansible.builtin.include_tasks: '{{ ansible_os_family | lower }}-pkg-install.yml'
   when:
     - mongodb_pkg_install
-    - mongodb_local_binary.rc != 0
+    - not mongodb_local_binary.stat.exists
 
 - name: Install MongoDB via tarball
   ansible.builtin.include_tasks: 'tarball-install.yml'
   when:
     - not mongodb_pkg_install
-    - mongodb_local_binary.rc != 0
+    - not mongodb_local_binary.stat.exists
