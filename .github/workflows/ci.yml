@@ -53,24 +53,29 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        distro: [centos8, debian10, debian11, ubuntu2004]
+        distro: [centos8, debian10, debian11, ubuntu2004, ubuntu2204]
         version: ["6.0.14"]
-        experimental: [false]
         molecule_scenario: ["-s default", "-s install_tarball"]
-        include:
-          - distro: ubuntu2204
-            version: "6.0.14"
-            experimental: false
-            molecule_scenario: "-s default"
-          - distro: ubuntu2204
-            version: "6.0.14"
-            experimental: true
-            molecule_scenario: "-s install_tarball"
     uses: ./.github/workflows/test.yml
     with:
       distro: ${{ matrix.distro }}
       version: ${{ matrix.version }}
-      experimental: ${{ matrix.experimental }}
+      molecule_scenario: ${{ matrix.molecule_scenario }}
+
+  v7_test:
+    needs:
+      - lint_ansible
+      - lint_python
+    strategy:
+      fail-fast: false
+      matrix:
+        distro: [centos8, debian11, debian12, ubuntu2004, ubuntu2204]
+        version: ["7.0.7"]
+        molecule_scenario: ["-s default", "-s install_tarball"]
+    uses: ./.github/workflows/test.yml
+    with:
+      distro: ${{ matrix.distro }}
+      version: ${{ matrix.version }}
       molecule_scenario: ${{ matrix.molecule_scenario }}
 
   build_results:
@@ -80,6 +85,7 @@ jobs:
       - v4_test
       - v5_test
       - v6_test
+      - v7_test
     steps:
       - name: All builds passed
         if: ${{ !(contains(needs.*.result, 'failure')) }}
