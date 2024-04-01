@@ -19,14 +19,14 @@
 
 - name: Verify that required string variables are defined
   ansible.builtin.assert:
-    that: mongodb_req_var is defined and mongodb_req_var | length > 0 and mongodb_req_var != None
-    fail_msg: ' needs to be set for the role to work'
-    success_msg: 'required variable is defined'
+    that: "{{ req_var }} is defined and {{ req_var }} | length > 0 and {{ req_var }} != None"
+    fail_msg: "{{ req_var }} needs to be set for the role to work"
+    success_msg: "{{ req_var }} is defined"
   loop:
     - mongodb_version
     - mongodb_os_distro
   loop_control:
-    loop_var: mongodb_req_var
+    loop_var: req_var
 
 - name: Check for mongod daemon
   ansible.builtin.command: which mongod
