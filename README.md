@@ -30,6 +30,12 @@ roles:
 
 ## Tested Platforms and Versions
 
+### MongoDB Community `7.0.7`
+
+- CentOS Stream 8
+- Debian 11 & 12
+- Ubuntu 20.04 & 22.04
+
 ### MongoDB Community `6.0.14`
 
 - CentOS Stream 8
@@ -61,12 +67,12 @@ roles:
 
 Common variables are listed below, along with default values (see `defaults/main.yml`):
 
-| Variable                  | Default   | Description                                            | Required  |
-| ------------------------- | --------- | ------------------------------------------------------ | --------- |
-| mongodb_pkg_install       | `true`    | Boolean, `true` to install MongoDB via package manager | No        |
-| mongodb_version           | `4.4.29`  | MongoDB Community stable releases `v4.4`, `v5`, `v6`   | Yes       |
-| mongodb_version_maj       | Automatic | Extracts major value from `mongodb_version`            | Automatic |
-| mongodb_version_maj_minor | Automatic | Extracts major and minor values from `mongodb_version` | Automatic |
+| Variable                  | Default   | Description                                                | Required  |
+| ------------------------- | --------- | ---------------------------------------------------------- | --------- |
+| mongodb_pkg_install       | `true`    | Boolean, `true` to install MongoDB via package manager     | No        |
+| mongodb_version           | `4.4.29`  | MongoDB Community stable releases `v4.4`, `v5`, `v6`, `v7` | Yes       |
+| mongodb_version_maj       | Automatic | Extracts major value from `mongodb_version`                | Automatic |
+| mongodb_version_maj_minor | Automatic | Extracts major and minor values from `mongodb_version`     | Automatic |
 
 ### Package Install Variables
 
@@ -76,7 +82,7 @@ Common variables are listed below, along with default values (see `defaults/main
 | --------------------- | ---------------- | --------------------------------------------------------------------- | -------- |
 | mongodb_gpg_key       | URL              | MongoDB GPG Key                                                       | No       |
 | mongodb_pkg_hold      | `true`           | Boolean, `true` to hold package version                               | No       |
-| mongodb_pkg_hold_list | MongoDB Packages | List of MongoDB packages installed from `mongodb-org`, `v4.4` to `v6` | No       |
+| mongodb_pkg_hold_list | MongoDB Packages | List of MongoDB packages installed from `mongodb-org`, `v4.4` to `v7` | No       |
 
 ### Binary Install Variables
 
@@ -189,6 +195,7 @@ Taylor Fore (https://github.com/trfore)
 
 ### MongoDB
 
+- https://www.mongodb.com/docs/manual/release-notes/
 - https://www.mongodb.com/download-center/community/releases
 - https://www.mongodb.com/docs/manual/administration/install-on-linux/
 - https://www.mongodb.com/docs/manual/administration/production-notes/
