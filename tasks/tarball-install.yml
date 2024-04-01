@@ -35,12 +35,24 @@
     loop_var: mongodb_path
 
 - name: Create MongoDB config
-  ansible.builtin.template:
-    src: mongod.conf.j2
-    dest: /etc/mongod.conf
-    mode: '0644'
-    owner: root
-    group: root
+  block:
+    - name: Create basic mongo.conf (v4 to v6)
+      ansible.builtin.template:
+        src: mongod.conf.j2
+        dest: /etc/mongod.conf
+        mode: '0644'
+        owner: root
+        group: root
+      when: mongodb_version_maj in ["4", "5", "6"]
+
+    - name: Create basic mongo.conf (v7)
+      ansible.builtin.template:
+        src: mongod_v7.conf.j2
+        dest: /etc/mongod.conf
+        mode: '0644'
+        owner: root
+        group: root
+      when: mongodb_version_maj == "7"
 
 - name: Create MongoDB service
   ansible.builtin.template:
