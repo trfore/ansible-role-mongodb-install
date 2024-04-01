@@ -22,6 +22,7 @@
   ansible.builtin.dpkg_selections:
     name: '{{ mongodb_pkg }}'
     selection: hold
+  ignore_errors: true
   loop: '{{ mongodb_pkg_hold_list }}'
   loop_control:
     loop_var: mongodb_pkg
