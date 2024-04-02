@@ -5,7 +5,7 @@
 # Note: This script is simple with few checks and designed to work on github
 # runners.
 
-VERSION=(4.4 5.0 6.0) # default MongoDB versions
+VERSION=(4.4 5.0 6.0 7.0) # default MongoDB versions
 
 if [ "$(id -u)" -ne 0 ]; then
     echo 'Error: script not running as root'
