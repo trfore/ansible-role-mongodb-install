@@ -70,7 +70,7 @@ jobs:
       fail-fast: false
       matrix:
         distro: [centos8, debian11, debian12, ubuntu2004, ubuntu2204]
-        version: ["7.0.7"]
+        version: [""]
         molecule_scenario: ["-s default", "-s install_tarball"]
     uses: ./.github/workflows/test.yml
     with:
