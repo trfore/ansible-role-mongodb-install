@@ -12,7 +12,6 @@ on:
 
 jobs:
   deploy:
-    if: ${{ github.event.release.published == true || inputs.manual_deploy == true }}
     uses: trfore/ansible-role/.github/workflows/deploy_ansible_galaxy.yml@main # remote repo
     secrets:
       API_KEY: ${{ secrets.GALAXY_API_KEY }}
