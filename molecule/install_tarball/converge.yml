@@ -12,6 +12,9 @@
       when: ansible_os_family == 'Debian'
       changed_when: false
 
+    - name: Install tzdata to populate /usr/share/zoneinfo
+      ansible.builtin.package:
+        name: tzdata
   tasks:
     - name: 'Include ansible-role-mongodb-install'
       ansible.builtin.include_role:
