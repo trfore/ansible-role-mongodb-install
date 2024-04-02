@@ -1,0 +1,9 @@
+mongodb_pkg_hold_list:
+  - mongodb-database-tools
+  - mongodb-mongosh
+  - mongodb-org
+  - mongodb-org-database
+  - mongodb-org-database-tools-extra
+  - mongodb-org-mongos
+  - mongodb-org-server
+  - mongodb-org-tools
