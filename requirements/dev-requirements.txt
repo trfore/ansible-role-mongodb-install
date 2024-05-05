@@ -1,5 +1,5 @@
 -r ../requirements.txt
-ansible>=7.4
+ansible>=7.4.0
 ansible-compat>=4.1.7
 ansible-lint>=6.14.0
 molecule>=4.0.0,<25.0.0
