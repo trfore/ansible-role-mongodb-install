@@ -1,5 +1,7 @@
 name: CD
 on:
+  release:
+    types: [published]
   workflow_dispatch:
     inputs:
       manual_deploy:
@@ -7,11 +9,10 @@ on:
         default: false
         required: true
         type: boolean
-  release:
-    types: [published]
 
 jobs:
   deploy:
+    if: ${{ (github.event_name == 'release' && github.event.action == 'published') || inputs.manual_deploy }}
     uses: trfore/ansible-role/.github/workflows/deploy_ansible_galaxy.yml@main # remote repo
     secrets:
       API_KEY: ${{ secrets.GALAXY_API_KEY }}

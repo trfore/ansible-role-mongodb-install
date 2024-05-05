@@ -1,15 +1,15 @@
 ---
 - name: Install essential packages and set OS specific variables
-  ansible.builtin.include_tasks: '{{ ansible_os_family | lower }}.yml'
+  ansible.builtin.include_tasks: "{{ ansible_os_family | lower }}.yml"
 
 - name: Load OS specific variables
-  ansible.builtin.include_vars: '{{ ansible_os_family | lower }}.yml'
+  ansible.builtin.include_vars: "{{ ansible_os_family | lower }}.yml"
 
 - name: Install MongoDB dependencies
   ansible.builtin.package:
-    name: '{{ mongodb_dep_pkg }}'
+    name: "{{ mongodb_dep_pkg }}"
     state: present
-  loop: '{{ mongodb_dependencies }}'
+  loop: "{{ mongodb_dependencies }}"
   loop_control:
     loop_var: mongodb_dep_pkg
   register: package_status
@@ -34,13 +34,13 @@
   register: mongodb_local_binary
 
 - name: Install MongoDB via package manager
-  ansible.builtin.include_tasks: '{{ ansible_os_family | lower }}-pkg-install.yml'
+  ansible.builtin.include_tasks: "{{ ansible_os_family | lower }}-pkg-install.yml"
   when:
     - mongodb_pkg_install
     - not mongodb_local_binary.stat.exists
 
 - name: Install MongoDB via tarball
-  ansible.builtin.include_tasks: 'tarball-install.yml'
+  ansible.builtin.include_tasks: "tarball-install.yml"
   when:
     - not mongodb_pkg_install
     - not mongodb_local_binary.stat.exists

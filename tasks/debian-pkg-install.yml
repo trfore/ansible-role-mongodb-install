@@ -1,30 +1,30 @@
 - name: Add MongoDB gpg signing key
   ansible.builtin.apt_key:
-    url: '{{ mongodb_gpg_key }}'
+    url: "{{ mongodb_gpg_key }}"
     state: present
 
 - name: Add MongoDB repository into sources list
   ansible.builtin.apt_repository:
-    filename: 'mongodb-org-{{ mongodb_version_maj_minor }}'
-    repo: '{{ mongodb_repository }}'
+    filename: "mongodb-org-{{ mongodb_version_maj_minor }}"
+    repo: "{{ mongodb_repository }}"
     state: present
 
 - name: Install MongoDB
   ansible.builtin.apt:
     update_cache: true
     name:
-      - 'mongodb-org={{ mongodb_version }}'
+      - "mongodb-org={{ mongodb_version }}"
     state: present
   register: mongodb_pkg_install
   notify: Enable MongoDB
 
 - name: Hold MongoDB packages
   ansible.builtin.dpkg_selections:
-    name: '{{ mongodb_pkg }}'
+    name: "{{ mongodb_pkg }}"
     selection: hold
   ignore_errors: true
   register: mongodb_held_packages
-  loop: '{{ mongodb_pkg_hold_list }}'
+  loop: "{{ mongodb_pkg_hold_list }}"
   loop_control:
     loop_var: mongodb_pkg
   when:

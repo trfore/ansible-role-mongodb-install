@@ -23,6 +23,8 @@ provisioner:
     MONGODB_VERSION: ${MOLECULE_MONGODB_VERSION:-"4.4.29"}
 verifier:
   name: testinfra
+  options:
+    p: "no:pytest-ansible"
 scenario:
   create_sequence:
     - dependency

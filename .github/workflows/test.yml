@@ -37,7 +37,7 @@ jobs:
           python-version: "3.x"
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: pip install -r requirements/dev-requirements.txt
 
       - name: Run molecule test
         run: molecule test ${{ inputs.molecule_scenario }}

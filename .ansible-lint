@@ -1,0 +1,9 @@
+profile: production
+exclude_paths:
+  - .github/workflows/
+  - .tox/
+  - .venv/
+  - changelogs/changelog.yaml
+warn_list:
+  - command-instead-of-shell
+  - yaml[line-length]

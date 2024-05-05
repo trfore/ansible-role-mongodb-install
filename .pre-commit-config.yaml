@@ -4,28 +4,17 @@ repos:
     hooks:
       - id: check-merge-conflict
       - id: check-symlinks
+      - id: check-yaml
+        args: [--allow-multiple-documents]
       - id: debug-statements
       - id: end-of-file-fixer
       - id: no-commit-to-branch
         args: [--branch, main]
       - id: trailing-whitespace
         args: [--markdown-linebreak-ext=md]
-      - id: check-yaml
-        args: [--allow-multiple-documents]
 
-  - repo: https://github.com/asottile/add-trailing-comma
-    rev: v3.0.0
-    hooks:
-      - id: add-trailing-comma
-
-  - repo: https://github.com/adrienverge/yamllint
-    rev: v1.31.0
-    hooks:
-      - id: yamllint
-        args: [-c=.yamllint]
-
-  - repo: https://github.com/robertdebock/pre-commit
-    rev: v1.5.2
+  - repo: https://github.com/trfore/pre-commit
+    rev: v1.5.3
     hooks:
       - id: ansible_role_find_unused_variable
       - id: ansible_role_fix_readability
@@ -34,3 +23,19 @@ repos:
       - id: ansible_role_find_horizontal_when
       - id: ansible_role_find_empty_files
       - id: ansible_role_find_empty_directories
+
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v3.1.0
+    hooks:
+      - id: prettier
+
+  - repo: https://github.com/adrienverge/yamllint
+    rev: v1.35.1
+    hooks:
+      - id: yamllint
+        args: [-c=.yamllint]
+
+  - repo: https://github.com/ansible/ansible-lint
+    rev: v24.2.2
+    hooks:
+      - id: ansible-lint

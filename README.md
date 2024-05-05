@@ -56,7 +56,12 @@ roles:
 
 ## Requirements
 
+- `ansible-core>=2.14.0`
+
+## Dependencies
+
 - `community.general.yum_versionlock` (for CentOS & RHEL target host)
+
   ```bash
   ansible-galaxy collection install community.general
   ```
@@ -113,14 +118,6 @@ Common variables are listed below, along with default values (see `defaults/main
 | mongodb_path_log      | `/var/log/mongodb`                        | PATH, MongoDB log folder (tar install)                              | No       |
 | mongodb_dependencies  | `["libcurl-minimal","openssl","xz-libs"]` | Required packages for MongoDB (tar install)                         | No       |
 | mongodb_pkg_hold_list | MongoDB Packages                          | List of MongoDB packages installed from `mongodb-org` (pkg install) | No       |
-
-## Dependencies
-
-- `community.general.yum_versionlock` (for CentOS & RHEL target host)
-
-  ```bash
-  ansible-galaxy collection install community.general
-  ```
 
 ## Example Playbooks
 
@@ -189,7 +186,6 @@ Taylor Fore (https://github.com/trfore)
 | [ansible-role-jsvc]            | [trfore.jsvc]            |
 | [ansible-role-mongodb-install] | [trfore.mongodb_install] |
 | [ansible-role-omada-install]   | [trfore.omada_install]   |
-| [ansible-playbook-omada]       |                          |
 
 ## References
 
@@ -206,6 +202,5 @@ Taylor Fore (https://github.com/trfore)
 [trfore.jsvc]: https://galaxy.ansible.com/trfore/jsvc
 [ansible-role-mongodb-install]: https://github.com/trfore/ansible-role-mongodb-install
 [trfore.mongodb_install]: https://galaxy.ansible.com/trfore/mongodb_install
-[ansible-playbook-omada]: https://github.com/trfore/ansible-playbook-omada
 [ansible-role-omada-install]: https://github.com/trfore/ansible-role-omada-install
 [trfore.omada_install]: https://galaxy.ansible.com/trfore/omada_install
