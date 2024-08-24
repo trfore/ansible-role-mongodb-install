@@ -61,7 +61,7 @@ jobs:
       fail-fast: false
       matrix:
         distro: [centos8, centos9, debian10, debian11, ubuntu2004, ubuntu2204]
-        version: ["6.0.16"]
+        version: ["6.0.17"]
         molecule_scenario: ["-s default", "-s install_tarball"]
     uses: ./.github/workflows/test.yml
     with:
@@ -77,7 +77,7 @@ jobs:
       fail-fast: false
       matrix:
         distro: [centos8, centos9, debian11, debian12, ubuntu2004, ubuntu2204]
-        version: ["7.0.12"]
+        version: ["7.0.14"]
         molecule_scenario: ["-s default", "-s install_tarball"]
     uses: ./.github/workflows/test.yml
     with:
