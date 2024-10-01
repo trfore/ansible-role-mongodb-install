@@ -10,7 +10,7 @@ Alternatively, you can install the MongoDB server binaries - `mongo`, `mongod`, 
 - `mongodb_tar_src: mongodb-linux-x86_64-{DISTRO}-{VERSION}.tgz`
 - `mongodb_tar_src_remote: false`
 
-See 'Example Playbooks' section for working examples. This role **does not configure the server**, it uses the default configuration values and minimal recommended `ulimit` settings. Its recommended to configure the server for production use, for details see: https://www.mongodb.com/docs/manual/administration/production-notes/
+See [Example Playbooks](#example-playbooks) for working examples. This role **does not configure the server**, it uses the default configuration values and minimal recommended `ulimit` settings. Its recommended to configure the server for production use, for details see: https://www.mongodb.com/docs/manual/administration/production-notes/
 
 ### Install the Role
 
