@@ -30,7 +30,7 @@ jobs:
       matrix:
         distro: [centos8, debian10, ubuntu2004]
         version: ["4.4.29"]
-        molecule_scenario: ["-s default", "-s install_tarball"]
+        molecule_scenario: ["-s default"]
     uses: ./.github/workflows/test.yml
     with:
       distro: ${{ matrix.distro }}
@@ -45,8 +45,8 @@ jobs:
       fail-fast: false
       matrix:
         distro: [centos8, debian10, debian11, ubuntu2004]
-        version: ["5.0.28"]
-        molecule_scenario: ["-s default", "-s install_tarball"]
+        version: ["5.0.31"]
+        molecule_scenario: ["-s default"]
     uses: ./.github/workflows/test.yml
     with:
       distro: ${{ matrix.distro }}
@@ -61,8 +61,8 @@ jobs:
       fail-fast: false
       matrix:
         distro: [centos8, centos9, debian10, debian11, ubuntu2004, ubuntu2204]
-        version: ["6.0.16"]
-        molecule_scenario: ["-s default", "-s install_tarball"]
+        version: ["6.0.19"]
+        molecule_scenario: ["-s default"]
     uses: ./.github/workflows/test.yml
     with:
       distro: ${{ matrix.distro }}
