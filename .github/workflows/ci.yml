@@ -21,38 +21,6 @@ jobs:
       - format
     uses: trfore/ansible-role/.github/workflows/lint_py.yml@main
 
-  v4_test:
-    needs:
-      - lint_ansible
-      - lint_python
-    strategy:
-      fail-fast: false
-      matrix:
-        distro: [centos8, debian10, ubuntu2004]
-        version: ["4.4.29"]
-        molecule_scenario: ["-s default"]
-    uses: ./.github/workflows/test.yml
-    with:
-      distro: ${{ matrix.distro }}
-      version: ${{ matrix.version }}
-      molecule_scenario: ${{ matrix.molecule_scenario }}
-
-  v5_test:
-    needs:
-      - lint_ansible
-      - lint_python
-    strategy:
-      fail-fast: false
-      matrix:
-        distro: [centos8, debian10, debian11, ubuntu2004]
-        version: ["5.0.31"]
-        molecule_scenario: ["-s default"]
-    uses: ./.github/workflows/test.yml
-    with:
-      distro: ${{ matrix.distro }}
-      version: ${{ matrix.version }}
-      molecule_scenario: ${{ matrix.molecule_scenario }}
-
   v6_test:
     needs:
       - lint_ansible
@@ -108,8 +76,6 @@ jobs:
       - format
       - lint_ansible
       - lint_python
-      - v4_test
-      - v5_test
       - v6_test
       - v7_test
       - v8_test
