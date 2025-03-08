@@ -30,7 +30,7 @@ roles:
 
 ## Tested Platforms and Versions
 
-### MongoDB Community ``
+### MongoDB Community `8.0.5`
 
 - CentOS Stream 8 & 9
 - Debian 12
