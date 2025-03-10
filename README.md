@@ -45,7 +45,7 @@ roles:
 ### MongoDB Community `6.0.20`
 
 - CentOS Stream 9
-- Debian 10 & 11
+- Debian 11
 - Ubuntu 20.04 & 22.04
 
 ### MongoDB Community `5.0.31` (EOL October 2024)
