@@ -32,7 +32,6 @@ tox -e mongo4 run
 
 # run all test in parallel
 tox run-parallel
-tox -e mongo4 run-parallel
 
 # pass Ansible Molecule args via Tox
 tox -e py-ansible2.17-mongo4-ubuntu20 run -- test --destroy=never
