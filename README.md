@@ -32,19 +32,19 @@ roles:
 
 ### MongoDB Community `8.0.5`
 
-- CentOS Stream 8 & 9
+- CentOS Stream 9
 - Debian 12
 - Ubuntu 20.04, 22.04 & 24.04
 
 ### MongoDB Community `7.0.17`
 
-- CentOS Stream 8 & 9
+- CentOS Stream 9
 - Debian 11 & 12
 - Ubuntu 20.04 & 22.04
 
 ### MongoDB Community `6.0.20`
 
-- CentOS Stream 8 & 9
+- CentOS Stream 9
 - Debian 10 & 11
 - Ubuntu 20.04 & 22.04
 
