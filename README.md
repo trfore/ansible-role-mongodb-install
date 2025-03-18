@@ -42,7 +42,7 @@ roles:
 - Debian 11 & 12
 - Ubuntu 20.04 & 22.04
 
-### MongoDB Community `6.0.20`
+### MongoDB Community `6.0.21`
 
 - CentOS Stream 9
 - Debian 11
