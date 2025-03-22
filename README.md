@@ -3,7 +3,7 @@
 [![CI](https://github.com/trfore/ansible-role-mongodb-install/actions/workflows/ci.yml/badge.svg)](https://github.com/trfore/ansible-role-mongodb-install/actions/workflows/ci.yml)
 [![CD](https://github.com/trfore/ansible-role-mongodb-install/actions/workflows/cd.yml/badge.svg?branch=main)](https://github.com/trfore/ansible-role-mongodb-install/actions/workflows/cd.yml)
 
-This role installs the MongoDB Community edition server metapackage, `mongodb-org`, via the OS's package manager (default) or the server binaries via tar file. It currently defaults to installing the **latest release from version 7**, you can install a newer major version by setting `mongodb_version: 8.0.5`, see 'Tested Platforms and Versions' section for a compatibility matrix.
+This role installs the MongoDB Community edition server metapackage, `mongodb-org`, via the OS's package manager (default) or the server binaries via tar file. It currently defaults to installing the **latest release from version 7**, you can install a newer major version by setting `mongodb_version: 8.0.6`, see 'Tested Platforms and Versions' section for a compatibility matrix.
 
 Alternatively, you can install the MongoDB server binaries - `mongo`, `mongod`, `mongos`, by setting `mongodb_pkg_install: false` and the role will download the **latest tarball from version 7** or a newer major version by setting `mongodb_version`. If you would like to install the binary from your local Ansible control host, download the appropriate tar file, `mongodb-linux-x86_64-{DISTRO}-{VERSION}.tgz`, to your `files` directory and set the following two variables in your playbook:
 
@@ -30,13 +30,13 @@ roles:
 
 ## Tested Platforms and Versions
 
-### MongoDB Community `8.0.5`
+### MongoDB Community `8.0.6`
 
 - CentOS Stream 9
 - Debian 12
 - Ubuntu 20.04, 22.04 & 24.04
 
-### MongoDB Community `7.0.17`
+### MongoDB Community `7.0.18`
 
 - CentOS Stream 9
 - Debian 11 & 12
@@ -81,7 +81,7 @@ Common variables are listed below, along with default values (see `defaults/main
 | Variable                  | Default   | Description                                                      | Required  |
 | ------------------------- | --------- | ---------------------------------------------------------------- | --------- |
 | mongodb_pkg_install       | `true`    | Boolean, `true` to install MongoDB via package manager           | No        |
-| mongodb_version           | `7.0.17`  | MongoDB Community stable releases `v4.4`, `v5`, `v6`, `v7`, `v8` | No        |
+| mongodb_version           | `7.0.18`  | MongoDB Community stable releases `v4.4`, `v5`, `v6`, `v7`, `v8` | No        |
 | mongodb_version_maj       | Automatic | Extracts major value from `mongodb_version`                      | Automatic |
 | mongodb_version_maj_minor | Automatic | Extracts major and minor values from `mongodb_version`           | Automatic |
 
@@ -142,7 +142,7 @@ Common variables are listed below, along with default values (see `defaults/main
   become: true
   vars:
     mongodb_pkg_install: true
-    mongodb_version: "8.0.5"
+    mongodb_version: "8.0.6"
   roles:
     - name: Install MongoDB
       role: trfore.mongodb_install
@@ -155,7 +155,7 @@ Common variables are listed below, along with default values (see `defaults/main
   become: true
   vars:
     mongodb_pkg_install: false
-    mongodb_version: "8.0.5"
+    mongodb_version: "8.0.6"
   roles:
     - name: Install MongoDB
       role: trfore.mongodb_install
@@ -168,7 +168,7 @@ Common variables are listed below, along with default values (see `defaults/main
   become: true
   vars:
     mongodb_pkg_install: false
-    mongodb_tar_src: mongodb-linux-x86_64-debian12-7.0.17.tgz
+    mongodb_tar_src: mongodb-linux-x86_64-debian12-7.0.18.tgz
     mongodb_tar_src_remote: false
   roles:
     - name: Install MongoDB
