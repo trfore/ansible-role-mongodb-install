@@ -6,7 +6,7 @@ on:
 
 jobs:
   update_mongodb:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: Check out codebase
         uses: actions/checkout@v4
@@ -17,7 +17,7 @@ jobs:
           sudo bash .github/workflows/scripts/add_mongodb_repo.sh
 
           # get current and latest versions, update files if needed
-          VERSION=(4.4 5.0 6.0 7.0 8.0)
+          VERSION=(6.0 7.0 8.0)
           for i in "${VERSION[@]}"; do
               maj=${i%.*}
               latest=$(apt-cache show mongodb-org | grep -om1 "^Version:\s"${i}"\.[0-9]*$" | awk '{print $2}')
@@ -41,12 +41,10 @@ jobs:
           # update 'mongodb.versions' file
           if [ "$update_version_file" == true ]; then
               jq -n \
-                  --arg v4 "$latest_v4" \
-                  --arg v5 "$latest_v5" \
                   --arg v6 "$latest_v6" \
                   --arg v7 "$latest_v7" \
                   --arg v8 "$latest_v8" \
-                  '{"4.4": $v4, "5.0": $v5, "6.0": $v6, "7.0": $v7, "8.0": $v8}' >mongodb.versions
+                  '{"6.0": $v6, "7.0": $v7, "8.0": $v8}' >mongodb.versions
 
               echo "MongoDB version check complete, updated to latest versions"
           else
