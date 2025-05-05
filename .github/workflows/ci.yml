@@ -61,7 +61,7 @@ jobs:
       fail-fast: false
       matrix:
         distro: [centos9, debian12, ubuntu2004, ubuntu2204, ubuntu2404]
-        version: ["8.0.8"]
+        version: ["8.0.9"]
         molecule_scenario: ["-s default"]
     uses: ./.github/workflows/test.yml
     with:
