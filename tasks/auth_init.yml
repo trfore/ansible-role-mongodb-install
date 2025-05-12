@@ -1,0 +1,121 @@
+---
+
+- name: Set default pymongo installation method
+  set_fact:
+    mongodb_pymongo_from_pip: true
+  when: mongodb_pymongo_from_pip is not defined
+
+- name: Force pip to false for known issues (e.g. Debian Buster)
+  set_fact:
+    mongodb_pymongo_from_pip: false
+  when:
+    - ansible_distribution == 'Debian'
+    - ansible_distribution_release == 'buster'
+
+- name: Install pymongo system package (yum/apt)
+  block:
+    - name: Install via yum
+      yum:
+        name: "{{ mongodb_pymongo_package }}"
+        state: present
+        lock_timeout: "{{ yum_lock_timeout | default(30) }}"
+      when: ansible_pkg_mgr == 'yum'
+
+    - name: Install via apt
+      apt:
+        name: "{{ mongodb_pymongo_package }}"
+        state: present
+      when: ansible_pkg_mgr == 'apt'
+  when: not mongodb_pymongo_from_pip
+
+- name: Include virtualenv configuration
+  include_tasks: install_pymongo_virtualenv.yml
+
+- name: Use different mongod.conf for auth initialization
+  template:
+    src: mongod_auth_init.conf.j2
+    dest: /etc/mongod.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+  - mongodb restart
+  - wait when mongodb is started on localhost
+  
+
+- name: Flush all handlers at this point
+  meta: flush_handlers
+
+- name: create administrative user "{{ mongodb_user_admin_name }}"
+  delegate_to: "{{ inventory_hostname }}"
+  vars:
+    ansible_python_interpreter: /opt/mongodb_venv/bin/python
+  mongodb_user:
+    database: admin
+    name: "{{ item.name }}"
+    password: "{{ item.password }}"
+    update_password: "{{ mongodb_user_update_password }}"
+    roles: "{{ item.roles }}"
+    login_host: "{{ mongodb_net_bindip.split(',') | map('replace', '0.0.0.0', '127.0.0.1') | list  | first }}"
+    login_port: "{{ mongodb_net_port | int }}"
+  with_items:
+    - {
+      name: "{{ mongodb_user_admin_name }}",
+      password: "{{ mongodb_user_admin_password }}",
+      roles: "userAdminAnyDatabase"
+      }
+  no_log: "{{ disable_logging_for_auth }}"
+
+- name: create administrative user "{{ mongodb_root_admin_name }}"
+  delegate_to: "{{ inventory_hostname }}"
+  vars:
+    ansible_python_interpreter: /opt/mongodb_venv/bin/python
+  mongodb_user:
+    database: admin
+    name: "{{ item.name }}"
+    password: "{{ item.password }}"
+    update_password: "{{ mongodb_user_update_password }}"
+    roles: "{{ item.roles }}"
+    login_host: "{{ mongodb_net_bindip.split(',') | map('replace', '0.0.0.0', '127.0.0.1') | list  | first }}"
+    login_port: "{{ mongodb_net_port | int }}"
+  with_items:
+    - {
+      name: "{{ mongodb_root_admin_name }}",
+      password: "{{ mongodb_root_admin_password }}",
+      roles: "root"
+      }
+  no_log: "{{ disable_logging_for_auth }}"
+
+- name: create backup user "{{ mongodb_root_backup_name }}"
+  delegate_to: "{{ inventory_hostname }}"
+  vars:
+    ansible_python_interpreter: /opt/mongodb_venv/bin/python
+  mongodb_user:
+    database: admin
+    name: "{{ item.name }}"
+    password: "{{ item.password }}"
+    update_password: "{{ mongodb_user_update_password }}"
+    roles: "{{ item.roles }}"
+    login_host: "{{ mongodb_net_bindip.split(',') | map('replace', '0.0.0.0', '127.0.0.1') | list  | first }}"
+    login_port: "{{ mongodb_net_port | int }}"
+  with_items:
+    - {
+      name: "{{ mongodb_root_backup_name }}",
+      password: "{{ mongodb_root_backup_password }}",
+      roles: "backup,clusterMonitor"
+      }
+  no_log: "{{ disable_logging_for_auth }}"
+
+- name: Move back mongod.conf
+  template:
+    src: mongod.conf.j2
+    dest: /etc/mongod.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+  - mongodb restart
+  - wait when mongodb is started 
+
+- name: Flush all handlers at this point
+  meta: flush_handlers

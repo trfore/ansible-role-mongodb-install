@@ -1,0 +1,20 @@
+- name: Install python3 venv tools
+  package:
+    name: "{{ (ansible_pkg_mgr == 'apt') | ternary('python3-venv', 'python3-virtualenv') }}"
+    state: present
+
+- name: Ensure python3 is installed
+  package:
+    name: python3
+    state: present
+
+- name: Create virtualenv
+  command: python3 -m venv /opt/mongodb_venv
+  args:
+    creates: /opt/mongodb_venv
+
+- name: Install pymongo into virtualenv
+  pip:
+    name: pymongo
+    version: "{{ mongodb_pymongo_pip_version | default(omit) }}"
+    executable: /opt/mongodb_venv/bin/pip

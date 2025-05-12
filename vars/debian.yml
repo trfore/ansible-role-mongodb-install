@@ -1,6 +1,6 @@
 ---
 # tarball install variables
-mongodb_path_db: /var/lib/mongod
+mongodb_path_db: /var/lib/mongodb # Could it broke something? that's value is default for ubuntu24.04
 mongodb_path_log: /var/log/mongodb
 mongodb_dependencies:
   - libcurl4

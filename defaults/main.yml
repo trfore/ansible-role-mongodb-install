@@ -12,3 +12,50 @@ mongodb_pkg_hold: true
 mongodb_path_exec: /usr/bin
 mongodb_tar_src: "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-{{ mongodb_os_distro }}-{{ mongodb_version }}.tgz" # mongodb_os_distro is set within an OS specific task file.
 mongodb_tar_src_remote: true
+
+# systemd unit limit variables
+mongodb_systemd_unit_limit_nofile: 64000
+mongodb_systemd_unit_limit_nproc: 64000
+
+# network variables
+mongodb_net_bindip: 127.0.0.1                    # Comma separated list of ip addresses to listen on
+mongodb_net_port: 27017                          # Port to listen on
+mongodb_net_ssl: disabled                        # Enable or disable ssl connections
+mongodb_net_ssl_mode: ""                         # Set the ssl mode (RequireSSL / preferSSL / AllowSSL / disabled)
+mongodb_net_ssl_pemfile: ""                      # Location of the pemfile to use for ssl
+mongodb_net_ssl_host: ""                         # Valid ssl hostname
+
+
+# security variables
+mongodb_security_authorization: disabled        # Enable/Disable authorization
+mongodb_security_javascript_enabled: true       # Enable/Disable javascript
+mongodb_user_update_password: "on_create"        # MongoDB user password update default policy
+
+# custom config options
+mongodb_config:
+
+mongodb_storage_journal_enabled: true          # Enable/Disable journal
+
+
+# names and passwords for administrative users
+mongodb_user_admin_name: UserAdmin             # Name of the user for administrative tasks
+mongodb_user_admin_password: passw01d          # Password for the user for administrative tasks
+
+mongodb_root_admin_name: RootAdmin             # Name of the user for root administrative tasks
+mongodb_root_admin_password: passw01d          # Password for the user for root administrative tasks
+
+mongodb_root_backup_name: BackupUser           # Name of the user for backup tasks
+mongodb_root_backup_password: passw01d         # Password for the user for backup tasks
+
+# auth initialization variables
+mongodb_pymongo_from_pip: true                   # Install latest PyMongo via PIP or package manager
+mongodb_pymongo_pip_version: 3.11.3
+mongodb_pymongo_deps:
+  - python3-pip
+
+mongodb_pymongo_package: python3-pymongo
+mongodb_pip_executable: pip3
+
+# THP variables
+mongodb_disable_transparent_hugepages: false
+mongodb_enable_transparent_hugepages: false 

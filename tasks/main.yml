@@ -1,4 +1,23 @@
 ---
+- name: Set a hostname
+  ansible.builtin.hostname:
+    name: "{{ hostname }}"
+  when: hostname is defined
+
+- name: Disable transparent huge pages on systemd systems
+  include_tasks: disable_transparent_hugepages.yml
+  when:
+    - mongodb_disable_transparent_hugepages | bool
+    - ansible_service_mgr == "systemd"
+    - mongodb_version_maj in ["4", "5", "6", "7"]
+
+- name: Enable transparent huge pages on systemd systems
+  include_tasks: enable_transparent_hugepages.yml
+  when:
+    - mongodb_enable_transparent_hugepages | bool
+    - ansible_service_mgr == "systemd"
+    - mongodb_version_maj in ["8"]
+
 - name: Install essential packages and set OS specific variables
   ansible.builtin.include_tasks: "{{ ansible_os_family | lower }}.yml"
 
@@ -44,3 +63,50 @@
   when:
     - not mongodb_pkg_install
     - not mongodb_local_binary.stat.exists
+
+- name: Check whether admin user is already exist
+  command: >
+    mongosh --quiet {{ '--ssl --host ' + mongodb_net_ssl_host if mongodb_net_ssl_mode == 'requireSSL' else '' }} -u {{ mongodb_user_admin_name }} \
+          -p {{ mongodb_user_admin_password }} --host {{ mongodb_net_bindip }} --port {{ mongodb_net_port }} --eval 'db.version()' admin
+  register: mongodb_user_admin_check
+  changed_when: false
+  check_mode: no
+  ignore_errors: true
+  when: 
+    - mongodb_security_authorization == 'enabled'
+  no_log: "{{ disable_logging_for_auth }}"
+
+
+- name: Include authorization configuration
+  include_tasks: auth_init.yml
+  when: 
+    - mongodb_security_authorization == 'enabled'
+    - mongodb_user_admin_check.rc != 0
+
+
+- name: Create usuall users
+  delegate_to: "{{ inventory_hostname }}"
+  vars:
+    ansible_python_interpreter: /opt/mongodb_venv/bin/python
+  mongodb_user:
+    database: "{{ item.database }}"
+    name: "{{ item.name }}"
+    password: "{{ item.password }}"
+    update_password: "{{ mongodb_user_update_password }}"
+    roles: "{{ item.roles }}"
+    login_user: "{{ mongodb_user_admin_name }}"
+    login_password: "{{ mongodb_user_admin_password }}"
+    login_port: "{{ mongodb_net_port | int }}"
+    login_host: "{{ mongodb_net_bindip|default('localhost') }}"
+    ssl: "{{ True if mongodb_net_ssl_mode == 'requireSSL' else False }}"
+  with_items:
+    - "{{ mongodb_users | default([]) }}"
+  when:
+    - mongodb_security_authorization == 'enabled'
+  no_log: "{{ disable_logging_for_auth }}"
+
+- name: service started
+  service:
+    name: mongod
+    state: started
+    enabled: yes

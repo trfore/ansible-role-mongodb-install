@@ -1,0 +1,20 @@
+---
+- name: Create disable transparent hugepages systemd service file
+  template:
+    src: "{{ item }}"
+    dest: /etc/systemd/system/disable-transparent-hugepages.service
+    owner: root
+    group: root
+    mode: 0644
+  with_first_found:
+    - "hugepages/disable-transparent-hugepages.{{ ansible_distribution | lower }}.service.j2"
+    - "hugepages/disable-transparent-hugepages.{{ ansible_os_family | lower }}.service.j2"
+  notify: 
+  - run disable-transparent-hugepages
+  when:
+    - ansible_service_mgr == "systemd"
+    - mongodb_disable_transparent_hugepages | bool
+
+- name: Flush all handlers at this point
+  meta: flush_handlers 
+  
