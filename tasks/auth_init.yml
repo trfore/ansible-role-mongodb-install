@@ -48,7 +48,7 @@
   delegate_to: "{{ inventory_hostname }}"
   vars:
     ansible_python_interpreter: /opt/mongodb_venv/bin/python
-  mongodb_user:
+  community.mongodb.mongodb_user:
     database: admin
     name: "{{ item.name }}"
     password: "{{ item.password }}"
@@ -64,7 +64,7 @@
   delegate_to: "{{ inventory_hostname }}"
   vars:
     ansible_python_interpreter: /opt/mongodb_venv/bin/python
-  mongodb_user:
+  community.mongodb.mongodb_user:
     database: admin
     name: "{{ item.name }}"
     password: "{{ item.password }}"
@@ -80,7 +80,7 @@
   delegate_to: "{{ inventory_hostname }}"
   vars:
     ansible_python_interpreter: /opt/mongodb_venv/bin/python
-  mongodb_user:
+  community.mongodb.mongodb_user:
     database: admin
     name: "{{ item.name }}"
     password: "{{ item.password }}"
