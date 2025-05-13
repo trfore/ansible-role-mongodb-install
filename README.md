@@ -78,16 +78,16 @@ roles:
 
 Common variables are listed below, along with default values (see `defaults/main.yml`):
 
-| Variable                  | Default   | Description                                                      | Required  |
-| ------------------------- | --------- | ---------------------------------------------------------------- | --------- |
-| mongodb_pkg_install       | `true`    | Boolean, `true` to install MongoDB via package manager           | No        |
-| mongodb_version           | `7.0.20`  | MongoDB Community stable releases `v4.4`, `v5`, `v6`, `v7`, `v8` | No        |
-| mongodb_version_maj       | Automatic | Extracts major value from `mongodb_version`                      | Automatic |
-| mongodb_version_maj_minor | Automatic | Extracts major and minor values from `mongodb_version`           | Automatic |
-| mongodb_disable_transparent_hugepages | `false` | Disable Transparent HugePages (THP) for MongoDB ≤ 7 | No |
-| mongodb_enable_transparent_hugepages | `false` | Enable Transparent HugePages (THP) for MongoDB ≥ 8 | No |
-| mongodb_security_authorization | `disabled` | MongoDB `authorization` setting in `mongod.conf`, e.g. `enabled` or `disabled` | No |
-| hostname | `` | Set the hostname for the MongoDB server (useful for some monitoring tools). | No |
+| Variable                              | Default    | Description                                                                    | Required  |
+| ------------------------------------- | ---------- | ------------------------------------------------------------------------------ | --------- |
+| mongodb_pkg_install                   | `true`     | Boolean, `true` to install MongoDB via package manager                         | No        |
+| mongodb_version                       | `7.0.20`   | MongoDB Community stable releases `v4.4`, `v5`, `v6`, `v7`, `v8`               | No        |
+| mongodb_version_maj                   | Automatic  | Extracts major value from `mongodb_version`                                    | Automatic |
+| mongodb_version_maj_minor             | Automatic  | Extracts major and minor values from `mongodb_version`                         | Automatic |
+| mongodb_disable_transparent_hugepages | `false`    | Disable Transparent HugePages (THP) for MongoDB ≤ 7                            | No        |
+| mongodb_enable_transparent_hugepages  | `false`    | Enable Transparent HugePages (THP) for MongoDB ≥ 8                             | No        |
+| mongodb_security_authorization        | `disabled` | MongoDB `authorization` setting in `mongod.conf`, e.g. `enabled` or `disabled` | No        |
+| hostname                              | ``         | Set the hostname for the MongoDB server (useful for some monitoring tools).    | No        |
 
 ### Package Install Variables
 
@@ -113,24 +113,24 @@ Common variables are listed below, along with default values (see `defaults/main
 
 Set these to automatically create users during provisioning. If `mongodb_security_authorization` is set to `enabled`, the users will be created after mongod starts (see `defaults/main.yml`).
 
-| Variable                  | Default   | Description                                                      | Required  |
-| ------------------------- | --------- | ---------------------------------------------------------------- | --------- |
-| disable_logging_for_auth       | `false`    | Boolean, suppress auth info in Ansible output (e.g., passwords)           | No        |
-| mongodb_user_admin_name           | `UserAdmin`  | Administrative user name | No        |
-| mongodb_user_admin_password       | `passw01d` | Administrative user password                     | No |
-| mongodb_root_admin_name | `RootAdmin` | 	Root user name          | No |
-| mongodb_root_admin_password | `passw01d` | Root user password | No |
-| mongodb_root_backup_name | `BackupUser` | Backup user name | No |
-| mongodb_root_backup_password | `passw01d` | Backup user password | No |
+| Variable                     | Default      | Description                                                     | Required |
+| ---------------------------- | ------------ | --------------------------------------------------------------- | -------- |
+| disable_logging_for_auth     | `false`      | Boolean, suppress auth info in Ansible output (e.g., passwords) | No       |
+| mongodb_user_admin_name      | `UserAdmin`  | Administrative user name                                        | No       |
+| mongodb_user_admin_password  | `passw01d`   | Administrative user password                                    | No       |
+| mongodb_root_admin_name      | `RootAdmin`  | Root user name                                                  | No       |
+| mongodb_root_admin_password  | `passw01d`   | Root user password                                              | No       |
+| mongodb_root_backup_name     | `BackupUser` | Backup user name                                                | No       |
+| mongodb_root_backup_password | `passw01d`   | Backup user password                                            | No       |
 
 ### Systemd Resource Limits
 
 `defaults/main.yml`:
 
-| Variable               | Default    | Description                                                           | Required |
-| ---------------------- | ---------- | --------------------------------------------------------------------- | -------- |
-| mongodb_systemd_unit_limit_nofile        | `64000`        | File descriptor limit | No       |
-| mongodb_systemd_unit_limit_nproc | `64000`     | Process count limit                 | No       |
+| Variable                          | Default | Description           | Required |
+| --------------------------------- | ------- | --------------------- | -------- |
+| mongodb_systemd_unit_limit_nofile | `64000` | File descriptor limit | No       |
+| mongodb_systemd_unit_limit_nproc  | `64000` | Process count limit   | No       |
 
 ### Other OS Specific Variables
 
@@ -241,7 +241,6 @@ Set these to automatically create users during provisioning. If `mongodb_securit
   roles:
     - name: Install MongoDB
       role: trfore.mongodb_install
-
 ```
 
 ## License
