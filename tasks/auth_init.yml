@@ -14,8 +14,8 @@
 - name: Install pymongo system package (yum/apt)
   when: not mongodb_pymongo_from_pip
   block:
-    - name: Install via yum
-      ansible.builtin.yum:
+    - name: Install via dnf/yum
+      ansible.builtin.dnf:
         name: "{{ mongodb_pymongo_package }}"
         state: present
         lock_timeout: "{{ yum_lock_timeout | default(30) }}"
