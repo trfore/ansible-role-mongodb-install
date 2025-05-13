@@ -43,3 +43,5 @@ tox -e py-ansible2.17-mongo4-ubuntu20 run -- test --destroy=never
 - [Github Docs: Forking a repository](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo#forking-a-repository)
 - [Ansible Docs: `ansible-core` support matrix](https://docs.ansible.com/ansible/latest/reference_appendices/release_and_maintenance.html#ansible-core-support-matrix)
 - [MongoDB Docs: MongoDB Agent Compatibility Matrix](https://www.mongodb.com/docs/ops-manager/current/core/requirements/#operating-systems-compatible-with-the-mongodb-agent)
+- [MongoDB Docs: Enabling Transparent Hugepages (THP) for MongoDB 8]: https://www.mongodb.com/docs/manual/administration/tcmalloc-performance/
+- [MongoDB Docs: Disabling Transparent Hugepages (THP) for MongoDB 7 or Earlier]: https://www.mongodb.com/docs/manual/tutorial/disable-transparent-huge-pages/

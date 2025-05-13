@@ -266,12 +266,14 @@ Taylor Fore (https://github.com/trfore)
 
 ### MongoDB
 
-- https://www.mongodb.com/docs/manual/release-notes/
-- https://www.mongodb.com/download-center/community/releases
-- https://www.mongodb.com/docs/manual/administration/install-on-linux/
-- https://www.mongodb.com/docs/manual/administration/production-notes/
-- https://www.mongodb.com/docs/manual/reference/configuration-options/
-- https://www.mongodb.com/docs/manual/reference/ulimit/
+- <https://www.mongodb.com/docs/manual/release-notes/>
+- <https://www.mongodb.com/download-center/community/releases>
+- <https://www.mongodb.com/docs/manual/administration/install-on-linux/>
+- <https://www.mongodb.com/docs/manual/administration/production-notes/>
+- <https://www.mongodb.com/docs/manual/reference/configuration-options/>
+- <https://www.mongodb.com/docs/manual/reference/ulimit/>
+- [MongoDB Docs: Disabling Transparent Hugepages (THP) for MongoDB 7 or Earlier]
+- [MongoDB Docs: Enabling Transparent Hugepages (THP) for MongoDB 8]
 
 [ansible-role-jsvc]: https://github.com/trfore/ansible-role-jsvc
 [trfore.jsvc]: https://galaxy.ansible.com/trfore/jsvc
@@ -279,3 +281,5 @@ Taylor Fore (https://github.com/trfore)
 [trfore.mongodb_install]: https://galaxy.ansible.com/trfore/mongodb_install
 [ansible-role-omada-install]: https://github.com/trfore/ansible-role-omada-install
 [trfore.omada_install]: https://galaxy.ansible.com/trfore/omada_install
+[MongoDB Docs: Enabling Transparent Hugepages (THP) for MongoDB 8]: https://www.mongodb.com/docs/manual/administration/tcmalloc-performance/
+[MongoDB Docs: Disabling Transparent Hugepages (THP) for MongoDB 7 or Earlier]: https://www.mongodb.com/docs/manual/tutorial/disable-transparent-huge-pages/
