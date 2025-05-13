@@ -105,8 +105,16 @@
     - mongodb_security_authorization == 'enabled'
   no_log: "{{ disable_logging_for_auth }}"
 
-- name: service started
-  service:
-    name: mongod
-    state: started
-    enabled: yes
+- name: Update mongod.conf
+  template:
+    src: mongod.conf.j2
+    dest: /etc/mongod.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+  - mongodb restart
+  - wait when mongodb is started 
+
+- name: Flush all handlers at this point
+  meta: flush_handlers
