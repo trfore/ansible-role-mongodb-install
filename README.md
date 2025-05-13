@@ -67,9 +67,10 @@ roles:
 ## Dependencies
 
 - `community.general.yum_versionlock` (for CentOS & RHEL target host)
+- `community.mongodb` required when `mongodb_security_authorization: enable`, [see detail below](#user-creation-variables)
 
   ```bash
-  ansible-galaxy collection install community.general
+  ansible-galaxy collection install community.general community.mongodb
   ```
 
 ## Role Variables
