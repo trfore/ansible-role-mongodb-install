@@ -1,6 +1,6 @@
 ---
 - name: Create enable transparent hugepages systemd service file
-  template:
+  ansible.builtin.template:
     src: "{{ item }}"
     dest: /etc/systemd/system/enable-transparent-hugepages.service
     owner: root
@@ -9,11 +9,11 @@
   with_first_found:
     - "hugepages/enable-transparent-hugepages.{{ ansible_distribution | lower }}.service.j2"
     - "hugepages/enable-transparent-hugepages.{{ ansible_os_family | lower }}.service.j2"
-  notify: 
-  - run enable-transparent-hugepages
+  notify:
+    - Run enable-transparent-hugepages
   when:
     - ansible_service_mgr == "systemd"
     - mongodb_enable_transparent_hugepages | bool
 
 - name: Flush all handlers at this point
-  meta: flush_handlers 
+  ansible.builtin.meta: flush_handlers
