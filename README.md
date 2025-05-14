@@ -67,9 +67,10 @@ roles:
 ## Dependencies
 
 - `community.general.yum_versionlock` (for CentOS & RHEL target host)
+- `community.mongodb` required when `mongodb_security_authorization: enable`, [see detail below](#user-creation-variables)
 
   ```bash
-  ansible-galaxy collection install community.general
+  ansible-galaxy collection install community.general community.mongodb
   ```
 
 ## Role Variables
@@ -112,24 +113,24 @@ Common variables are listed below, along with default values (see `defaults/main
 
 Set these to automatically create users during provisioning. If `mongodb_security_authorization` is set to `enabled`, the users will be created after mongod starts (see `defaults/main.yml`).
 
-| Variable                  | Default   | Description                                                      | Required  |
-| ------------------------- | --------- | ---------------------------------------------------------------- | --------- |
-| disable_logging_for_auth       | `false`    | Boolean, suppress auth info in Ansible output (e.g., passwords)           | No        |
-| mongodb_user_admin_name           | `UserAdmin`  | Administrative user name | No        |
-| mongodb_user_admin_password       | `passw01d` | Administrative user password                     | No |
-| mongodb_root_admin_name | `RootAdmin` | 	Root user name          | No |
-| mongodb_root_admin_password | `passw01d` | Root user password | No |
-| mongodb_root_backup_name | `BackupUser` | Backup user name | No |
-| mongodb_root_backup_password | `passw01d` | Backup user password | No |
+| Variable                     | Default      | Description                                                     | Required |
+| ---------------------------- | ------------ | --------------------------------------------------------------- | -------- |
+| disable_logging_for_auth     | `false`      | Boolean, suppress auth info in Ansible output (e.g., passwords) | No       |
+| mongodb_user_admin_name      | `UserAdmin`  | Administrative user name                                        | No       |
+| mongodb_user_admin_password  | `passw01d`   | Administrative user password                                    | No       |
+| mongodb_root_admin_name      | `RootAdmin`  | Root user name                                                  | No       |
+| mongodb_root_admin_password  | `passw01d`   | Root user password                                              | No       |
+| mongodb_root_backup_name     | `BackupUser` | Backup user name                                                | No       |
+| mongodb_root_backup_password | `passw01d`   | Backup user password                                            | No       |
 
 ### Systemd Resource Limits
 
 `defaults/main.yml`:
 
-| Variable               | Default    | Description                                                           | Required |
-| ---------------------- | ---------- | --------------------------------------------------------------------- | -------- |
-| mongodb_systemd_unit_limit_nofile        | `64000`        | File descriptor limit | No       |
-| mongodb_systemd_unit_limit_nproc | `64000`     | Process count limit                 | No       |
+| Variable                          | Default | Description           | Required |
+| --------------------------------- | ------- | --------------------- | -------- |
+| mongodb_systemd_unit_limit_nofile | `64000` | File descriptor limit | No       |
+| mongodb_systemd_unit_limit_nproc  | `64000` | Process count limit   | No       |
 
 ### Other OS Specific Variables
 
@@ -239,7 +240,6 @@ Set these to automatically create users during provisioning. If `mongodb_securit
   roles:
     - name: Install MongoDB
       role: trfore.mongodb_install
-
 ```
 
 ## License
@@ -264,12 +264,14 @@ Taylor Fore (https://github.com/trfore)
 
 ### MongoDB
 
-- https://www.mongodb.com/docs/manual/release-notes/
-- https://www.mongodb.com/download-center/community/releases
-- https://www.mongodb.com/docs/manual/administration/install-on-linux/
-- https://www.mongodb.com/docs/manual/administration/production-notes/
-- https://www.mongodb.com/docs/manual/reference/configuration-options/
-- https://www.mongodb.com/docs/manual/reference/ulimit/
+- <https://www.mongodb.com/docs/manual/release-notes/>
+- <https://www.mongodb.com/download-center/community/releases>
+- <https://www.mongodb.com/docs/manual/administration/install-on-linux/>
+- <https://www.mongodb.com/docs/manual/administration/production-notes/>
+- <https://www.mongodb.com/docs/manual/reference/configuration-options/>
+- <https://www.mongodb.com/docs/manual/reference/ulimit/>
+- [MongoDB Docs: Disabling Transparent Hugepages (THP) for MongoDB 7 or Earlier]
+- [MongoDB Docs: Enabling Transparent Hugepages (THP) for MongoDB 8]
 
 [ansible-role-jsvc]: https://github.com/trfore/ansible-role-jsvc
 [trfore.jsvc]: https://galaxy.ansible.com/trfore/jsvc
@@ -277,3 +279,5 @@ Taylor Fore (https://github.com/trfore)
 [trfore.mongodb_install]: https://galaxy.ansible.com/trfore/mongodb_install
 [ansible-role-omada-install]: https://github.com/trfore/ansible-role-omada-install
 [trfore.omada_install]: https://galaxy.ansible.com/trfore/omada_install
+[MongoDB Docs: Enabling Transparent Hugepages (THP) for MongoDB 8]: https://www.mongodb.com/docs/manual/administration/tcmalloc-performance/
+[MongoDB Docs: Disabling Transparent Hugepages (THP) for MongoDB 7 or Earlier]: https://www.mongodb.com/docs/manual/tutorial/disable-transparent-huge-pages/

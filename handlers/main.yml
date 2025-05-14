@@ -5,36 +5,35 @@
     enabled: true
     state: started
 
-- name: wait when mongodb is started
-  wait_for:
+- name: Wait when mongodb is started
+  ansible.builtin.wait_for:
     host: "{{ item }}"
     port: "{{ mongodb_net_port }}"
     timeout: 30
   with_items: "{{ mongodb_net_bindip.split(',') | map('replace', '0.0.0.0', '127.0.0.1') | list }}"
 
-
-- name: wait when mongodb is started on localhost
-  wait_for:
+- name: Wait when mongodb is started on localhost
+  ansible.builtin.wait_for:
     host: "127.0.0.1"
     port: "{{ mongodb_net_port }}"
     delay: 5
     timeout: 120
 
-- name: run disable-transparent-hugepages
-  systemd:
+- name: Run disable-transparent-hugepages
+  ansible.builtin.systemd:
     name: disable-transparent-hugepages
     enabled: true
     state: started
     daemon_reload: yes
 
-- name: run enable-transparent-hugepages
-  systemd:
+- name: Run enable-transparent-hugepages
+  ansible.builtin.systemd:
     name: enable-transparent-hugepages
     enabled: true
     state: started
     daemon_reload: yes
 
-- name: mongodb restart
-  service:
+- name: Mongodb restart
+  ansible.builtin.service:
     name: mongod
     state: restarted
