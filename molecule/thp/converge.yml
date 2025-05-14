@@ -28,11 +28,8 @@
     mongodb_systemd_unit_limit_nofile: 64000
     mongodb_systemd_unit_limit_nproc: 64000
 
-    # In MongoDB 8.0 and later, ensure that THP is enabled before mongod starts by creating a service file for your platform's initialization system. If you are using MongoDB 7.0 or earlier, disable THP.
-    mongodb_disable_transparent_hugepages: false # Set to true if you are using MongoDB 7.0 or earlier
-    mongodb_enable_transparent_hugepages: true # Because we are using MongoDB 8.0
+    mongodb_transparent_hugepages_optimization: true
 
-    # Example of how to add a custom configuration to the mongod.conf file (experimental)
     mongodb_config:
       processManagement:
         fork: false
