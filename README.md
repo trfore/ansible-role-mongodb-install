@@ -79,15 +79,15 @@ roles:
 
 Common variables are listed below, along with default values (see `defaults/main.yml`):
 
-| Variable                  | Default   | Description                                                      | Required  |
-| ------------------------- | --------- | ---------------------------------------------------------------- | --------- |
-| mongodb_pkg_install       | `true`    | Boolean, `true` to install MongoDB via package manager           | No        |
-| mongodb_version           | `7.0.20`  | MongoDB Community stable releases `v4.4`, `v5`, `v6`, `v7`, `v8` | No        |
-| mongodb_version_maj       | Automatic | Extracts major value from `mongodb_version`                      | Automatic |
-| mongodb_version_maj_minor | Automatic | Extracts major and minor values from `mongodb_version`           | Automatic |
-| mongodb_transparent_hugepages_optimization | `false` | Disable Transparent HugePages (THP) for MongoDB ≤ 7 or enable Transparent HugePages (THP) for MongoDB ≥ 8 | No |
-| mongodb_security_authorization | `disabled` | MongoDB `authorization` setting in `mongod.conf`, e.g. `enabled` or `disabled` | No |
-| hostname | `` | Set the hostname for the MongoDB server (useful for some monitoring tools). | No |
+| Variable                                   | Default    | Description                                                                                               | Required  |
+| ------------------------------------------ | ---------- | --------------------------------------------------------------------------------------------------------- | --------- |
+| mongodb_pkg_install                        | `true`     | Boolean, `true` to install MongoDB via package manager                                                    | No        |
+| mongodb_version                            | `7.0.20`   | MongoDB Community stable releases `v4.4`, `v5`, `v6`, `v7`, `v8`                                          | No        |
+| mongodb_version_maj                        | Automatic  | Extracts major value from `mongodb_version`                                                               | Automatic |
+| mongodb_version_maj_minor                  | Automatic  | Extracts major and minor values from `mongodb_version`                                                    | Automatic |
+| mongodb_transparent_hugepages_optimization | `false`    | Disable Transparent HugePages (THP) for MongoDB ≤ 7 or enable Transparent HugePages (THP) for MongoDB ≥ 8 | No        |
+| mongodb_security_authorization             | `disabled` | MongoDB `authorization` setting in `mongod.conf`, e.g. `enabled` or `disabled`                            | No        |
+| hostname                                   | ``         | Set the hostname for the MongoDB server (useful for some monitoring tools).                               | No        |
 
 ### Package Install Variables
 
