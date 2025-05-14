@@ -84,8 +84,7 @@ Common variables are listed below, along with default values (see `defaults/main
 | mongodb_version           | `7.0.20`  | MongoDB Community stable releases `v4.4`, `v5`, `v6`, `v7`, `v8` | No        |
 | mongodb_version_maj       | Automatic | Extracts major value from `mongodb_version`                      | Automatic |
 | mongodb_version_maj_minor | Automatic | Extracts major and minor values from `mongodb_version`           | Automatic |
-| mongodb_disable_transparent_hugepages | `false` | Disable Transparent HugePages (THP) for MongoDB ≤ 7 | No |
-| mongodb_enable_transparent_hugepages | `false` | Enable Transparent HugePages (THP) for MongoDB ≥ 8 | No |
+| mongodb_transparent_hugepages_optimization | `false` | Disable Transparent HugePages (THP) for MongoDB ≤ 7 or enable Transparent HugePages (THP) for MongoDB ≥ 8 | No |
 | mongodb_security_authorization | `disabled` | MongoDB `authorization` setting in `mongod.conf`, e.g. `enabled` or `disabled` | No |
 | hostname | `` | Set the hostname for the MongoDB server (useful for some monitoring tools). | No |
 
@@ -230,8 +229,7 @@ Set these to automatically create users during provisioning. If `mongodb_securit
     mongodb_systemd_unit_limit_nproc: 64000
 
     # In MongoDB 8.0 and later, ensure that THP is enabled before mongod starts by creating a service file for your platform's initialization system. If you are using MongoDB 7.0 or earlier, disable THP.
-    mongodb_disable_transparent_hugepages: false # Set to true if you are using MongoDB 7.0 or earlier
-    mongodb_enable_transparent_hugepages: true # Because we are using MongoDB 8.0
+    mongodb_transparent_hugepages_optimization: true
 
     # Example of how to add a custom configuration to the mongod.conf file (experimental)
     mongodb_config:

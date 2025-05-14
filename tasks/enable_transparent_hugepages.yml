@@ -13,7 +13,7 @@
   - run enable-transparent-hugepages
   when:
     - ansible_service_mgr == "systemd"
-    - mongodb_enable_transparent_hugepages | bool
+    - mongodb_transparent_hugepages_optimization | bool
 
 - name: Flush all handlers at this point
   meta: flush_handlers 

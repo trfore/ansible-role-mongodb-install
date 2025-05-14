@@ -7,14 +7,14 @@
 - name: Disable transparent huge pages on systemd systems
   include_tasks: disable_transparent_hugepages.yml
   when:
-    - mongodb_disable_transparent_hugepages | bool
+    - mongodb_transparent_hugepages_optimization | bool
     - ansible_service_mgr == "systemd"
     - mongodb_version_maj in ["4", "5", "6", "7"]
 
 - name: Enable transparent huge pages on systemd systems
   include_tasks: enable_transparent_hugepages.yml
   when:
-    - mongodb_enable_transparent_hugepages | bool
+    - mongodb_transparent_hugepages_optimization | bool
     - ansible_service_mgr == "systemd"
     - mongodb_version_maj in ["8"]
 

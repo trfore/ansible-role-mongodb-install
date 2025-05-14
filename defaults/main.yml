@@ -54,5 +54,4 @@ mongodb_pymongo_pip_version: 3.11.3
 mongodb_pymongo_package: python3-pymongo
 
 # THP variables
-mongodb_disable_transparent_hugepages: false
-mongodb_enable_transparent_hugepages: false 
+mongodb_transparent_hugepages_optimization: false
