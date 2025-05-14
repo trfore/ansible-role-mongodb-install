@@ -4,7 +4,7 @@ dependency:
 driver:
   name: docker
 platforms:
-  - image: ${MOLECULE_IMAGE:-trfore/docker-debian10-systemd}
+  - image: ${MOLECULE_IMAGE:-trfore/docker-ubuntu2204-systemd}
     name: ${MOLECULE_NAME:-instance}
     command: ${MOLECULE_COMMAND:-""}
     tmpfs:
