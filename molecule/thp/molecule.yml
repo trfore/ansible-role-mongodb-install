@@ -1,0 +1,54 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+platforms:
+  - image: ${MOLECULE_IMAGE:-trfore/docker-ubuntu2204-systemd}
+    name: ${MOLECULE_NAME:-instance}
+    command: ${MOLECULE_COMMAND:-""}
+    tmpfs:
+      - /run
+      - /tmp
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
+    cgroupns_mode: host
+    privileged: true
+    pre_build_image: true
+provisioner:
+  name: ansible
+  playbooks:
+    converge: ${MOLECULE_PLAYBOOK:-converge.yml}
+  env:
+    MONGODB_VERSION: ${MOLECULE_MONGODB_VERSION:-"8.0.9"}
+verifier:
+  name: testinfra
+  options:
+    p: "no:pytest-ansible"
+scenario:
+  create_sequence:
+    - dependency
+    - create
+  check_sequence:
+    - dependency
+    - destroy
+    - create
+    - converge
+    - check
+    - destroy
+  converge_sequence:
+    - dependency
+    - create
+    - converge
+  destroy_sequence:
+    - dependency
+    - destroy
+  test_sequence:
+    - dependency
+    - destroy
+    - syntax
+    - create
+    - converge
+    - idempotence
+    - verify
+    - destroy
