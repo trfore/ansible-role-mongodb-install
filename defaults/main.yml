@@ -50,7 +50,6 @@ mongodb_root_backup_password: passw01d         # Password for the user for backu
 # auth initialization variables
 mongodb_pymongo_from_pip: true                 # Install latest PyMongo via PIP or package manager
 mongodb_pymongo_pip_version: 3.11.3
-
 mongodb_pymongo_package: python3-pymongo
 
 # THP variables
