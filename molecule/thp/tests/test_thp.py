@@ -12,7 +12,6 @@ def test_package_version(host):
     "name,running",
     [
         ("mongod", True),
-        ("dev-hugepages.mount", True),
         ("enable-transparent-hugepages", False),
     ],
 )
@@ -22,6 +21,10 @@ def test_service_enabled_and_running(host, name, running):
     # some services are one-shot
     if running:
         assert service.is_running
+
+
+def test_huge_page_support_enabled(host):
+    assert host.file("/proc/meminfo").contains("^AnonHugePages:[ ]*[0-9]* kB$")
 
 
 def test_service_tcp_port(host):
