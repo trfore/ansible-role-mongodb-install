@@ -66,7 +66,7 @@
 
 - name: Enable Security Authorization and Create Users
   ansible.builtin.include_tasks: auth_init.yml
-  when: mongodb_security_authorization
+  when: mongodb_security_authorization == "enabled"
 
 - name: Update mongod.conf
   ansible.builtin.template:
