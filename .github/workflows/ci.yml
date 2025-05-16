@@ -74,7 +74,6 @@ jobs:
     needs:
       - lint_ansible
       - lint_python
-      - v6_test
       - v7_test
       - v8_test
     strategy:
