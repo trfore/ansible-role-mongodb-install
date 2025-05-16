@@ -83,7 +83,10 @@ jobs:
         version: ["8.0.9"]
         molecule_scenario: ["-s thp"]
         include:
-          - distro: [centos9, debian12]
+          - distro: centos9
+            experimental: true
+            molecule_scenario: ["-s thp"]
+          - distro: debian12
             experimental: true
             molecule_scenario: ["-s thp"]
     uses: ./.github/workflows/test.yml
