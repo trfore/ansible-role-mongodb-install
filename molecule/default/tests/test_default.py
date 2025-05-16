@@ -13,6 +13,10 @@ def test_service_running_and_enabled(host):
     assert service.is_enabled
 
 
+def test_huge_page_support_disabled(host):
+    assert host.file("/proc/meminfo").contains("^AnonHugePages:[ ]*0 kB$")
+
+
 def test_service_tcp_port(host):
     socket = host.socket("tcp://127.0.0.1:27017")
     assert socket.is_listening
