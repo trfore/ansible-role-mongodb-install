@@ -99,6 +99,7 @@ jobs:
       - v6_test
       - v7_test
       - v8_test
+      - v8_test_thp
     steps:
       - name: All jobs passed
         if: ${{ !(contains(needs.*.result, 'failure')) }}
