@@ -79,14 +79,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        distro: [ubuntu2404]
+        distro: [debian12, ubuntu2404]
         version: ["8.0.9"]
         molecule_scenario: ["-s thp"]
         include:
           - distro: centos9
-            experimental: true
-            molecule_scenario: ["-s thp"]
-          - distro: debian12
             experimental: true
             molecule_scenario: ["-s thp"]
     uses: ./.github/workflows/test.yml
