@@ -27,6 +27,12 @@ def test_huge_page_support_enabled(host):
     assert host.file("/proc/meminfo").contains("^AnonHugePages:[ ]*[0-9]* kB$")
 
 
+def test_pymongo_is_installed(host):
+    py_version = host.file("/opt/mongodb_venv/lib/").listdir()[0]
+    pymongo_path = "/opt/mongodb_venv/lib/" + py_version + "/site-packages/pymongo"
+    assert host.file(pymongo_path).is_directory
+
+
 def test_service_tcp_port(host):
     socket = host.socket("tcp://127.0.0.1:27018")
     assert socket.is_listening
