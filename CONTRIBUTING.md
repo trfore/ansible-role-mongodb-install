@@ -20,14 +20,25 @@ git push -u origin MY_BRANCH
 gh pr create --title 'feature: add ...'
 ```
 
+## Local Development Environment
+
+```sh
+cd ansible-role-mongodb-install
+python3 -m venv .venv && source .venv/bin/activate
+python3 -m pip install -r requirements/dev-requirements.txt
+pre-commit install
+```
+
 ## Local Testing
 
 - A local installation of [Docker](https://docs.docker.com/engine/installation/) is required to run the `molecule` test scenarios.
+- TODO Important: When testing THP scenarios, XXX host environment is modified.... the systemd enabled containers run in a privileged mode, therefore XXX
 
 ### Using Tox
 
 - Tox automates the process of running formatting/linting tools and Ansible Molecule tests.
 - All `tox` environments are created within the project directory under `.tox`.
+  - Each tox environment will contain all required python libraries and ansible roles and collections.
 
 ```sh
 # list environments and test
@@ -43,8 +54,10 @@ tox run-parallel
 ```
 
 - For iterative development and testing, the tox molecule environments are written to accept `molecule` arguments. This
-  allows for codebase changes to be tested as you write across multiple distros and versions of `ansible-core`. Note:
-  When passing molecule args via tox, include the scenario arg `-s [SCENARIO_NAME]`.
+  allows for codebase changes to be tested as you write across multiple distros and versions of `ansible-core`.
+  - When passing molecule args via tox, include the scenario arg `-s [SCENARIO_NAME]`.
+  - If you set `--destroy=never`, be sure stop and remove the container using molecule's `destroy` or via docker CLI
+    `docker stop $(docker ps -a -q)`. WARNING:
 
 ```sh
 # molecule converge
@@ -61,6 +74,9 @@ docker exec -it py3.11-ansible2.18-mongo8-ubuntu24-default  bash
 tox -f default run-parallel -- test -s default --destroy=never
 # remove all containers
 tox -f default run-parallel -- destroy -s default
+
+# run verification (pytest)
+tox -e py3.11-ansible2.18-mongo8-ubuntu24-default run -- verify -s default
 ```
 
 - You can also pass environment variables to tox for: `MOLECULE_IMAGE` and `MONGODB_VERSION`.
