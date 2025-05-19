@@ -67,17 +67,3 @@
 - name: Enable Security Authorization and Create Users
   ansible.builtin.include_tasks: auth_init.yml
   when: mongodb_security_authorization == "enabled"
-
-- name: Update mongod.conf
-  ansible.builtin.template:
-    src: mongod.conf.j2
-    dest: /etc/mongod.conf
-    owner: root
-    group: root
-    mode: 0644
-  notify:
-    - Mongodb restart
-    - Wait when mongodb is started
-
-- name: Flush all handlers at this point
-  ansible.builtin.meta: flush_handlers

@@ -123,3 +123,17 @@
   with_items:
     - "{{ mongodb_users | default([]) }}"
   no_log: "{{ disable_logging_for_auth }}"
+
+- name: Update mongod.conf
+  ansible.builtin.template:
+    src: mongod.conf.j2
+    dest: /etc/mongod.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - Mongodb restart
+    - Wait when mongodb is started
+
+- name: Flush all handlers at this point
+  ansible.builtin.meta: flush_handlers
