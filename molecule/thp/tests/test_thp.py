@@ -28,8 +28,8 @@ def test_huge_page_support_enabled(host):
 
 
 def test_pymongo_is_installed(host):
-    py_version = host.file("/opt/mongodb_venv/lib/").listdir()[0]
-    pymongo_path = "/opt/mongodb_venv/lib/" + py_version + "/site-packages/pymongo"
+    py_ver = host.file("/opt/mongodb_venv/lib/").listdir()[0]
+    pymongo_path = "/opt/mongodb_venv/lib/" + py_ver + "/site-packages/pymongo"
     assert host.file(pymongo_path).is_directory
 
 
