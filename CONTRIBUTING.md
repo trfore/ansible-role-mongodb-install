@@ -75,6 +75,9 @@ tox -f default run-parallel -- test -s default --destroy=never
 # remove all containers
 tox -f default run-parallel -- destroy -s default
 
+# add debugging flag
+tox -f default run-parallel -- --debug test -s default --destroy=never
+
 # run verification (pytest)
 tox -e py3.11-ansible2.18-mongo8-ubuntu24-default run -- verify -s default
 ```
