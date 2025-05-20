@@ -8,10 +8,10 @@
 # Where and how to store data.
 storage:
   dbPath: {{ mongodb_path_db }}
-  {% if mongodb_version_maj not in ["7", "8"] %}
+{% if mongodb_version_maj not in ["7", "8"] %}
   journal:
     enabled: {{ mongodb_storage_journal_enabled | to_nice_json }}
-  {% endif %}
+{% endif %}
 #  engine:
 #  mmapv1:
 #  wiredTiger:
@@ -68,6 +68,7 @@ net:
 {% endfor %}
 {% endif %}
 
+
 # how the process runs
 processManagement:
   timeZoneInfo: /usr/share/zoneinfo
@@ -105,3 +106,7 @@ security:
 #replication:
 
 #sharding:
+
+## Enterprise-Only Options:
+
+#auditLog:
