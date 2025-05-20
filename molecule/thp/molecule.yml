@@ -25,6 +25,7 @@ verifier:
   name: testinfra
   options:
     p: "no:pytest-ansible"
+    verbose: true
 scenario:
   create_sequence:
     - dependency
