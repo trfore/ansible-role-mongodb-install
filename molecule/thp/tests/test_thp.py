@@ -5,7 +5,10 @@ from pathlib import Path
 
 def test_config_file(host):
     expected = Path(__file__).with_name("expected_mongo.conf")
-    assert expected.read_text() == host.file("/etc/mongod.conf").content_string
+    assert (
+        expected.read_text(encoding="utf-8")
+        == host.file("/etc/mongod.conf").content_string
+    )
 
 
 def test_package_version(host):
