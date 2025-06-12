@@ -28,8 +28,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+<<<<<<< main
+        distro: [centos9, debian11, ubuntu2204]
+        version: ["6.0.23"]
+=======
         distro: [centos9, debian11, ubuntu2004, ubuntu2204]
         version: ["6.0.24"]
+>>>>>>> main
         molecule_scenario: ["-s default"]
     uses: ./.github/workflows/test.yml
     with:
@@ -44,8 +49,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+<<<<<<< main
+        distro: [centos9, debian11, debian12, ubuntu2204]
+        version: ["7.0.20"]
+=======
         distro: [centos9, debian11, debian12, ubuntu2004, ubuntu2204]
         version: ["7.0.21"]
+>>>>>>> main
         molecule_scenario: ["-s default"]
     uses: ./.github/workflows/test.yml
     with:
@@ -60,9 +70,37 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+<<<<<<< main
+        distro: [centos9, debian12, ubuntu2404]
+        version: ["8.0.9"]
+=======
         distro: [centos9, debian12, ubuntu2004, ubuntu2204, ubuntu2404]
         version: ["8.0.10"]
+>>>>>>> main
         molecule_scenario: ["-s default"]
+    uses: ./.github/workflows/test.yml
+    with:
+      distro: ${{ matrix.distro }}
+      version: ${{ matrix.version }}
+      molecule_scenario: ${{ matrix.molecule_scenario }}
+
+  # Run these test last and use separate runner to avoid FP/FN on THP test
+  v8_test_thp:
+    needs:
+      - lint_ansible
+      - lint_python
+      - v7_test
+      - v8_test
+    strategy:
+      fail-fast: false
+      matrix:
+        distro: [debian12, ubuntu2404]
+        version: ["8.0.9"]
+        molecule_scenario: ["-s thp"]
+        include:
+          - distro: centos9
+            experimental: true
+            molecule_scenario: ["-s thp"]
     uses: ./.github/workflows/test.yml
     with:
       distro: ${{ matrix.distro }}
@@ -79,6 +117,7 @@ jobs:
       - v6_test
       - v7_test
       - v8_test
+      - v8_test_thp
     steps:
       - name: All jobs passed
         if: ${{ !(contains(needs.*.result, 'failure')) }}
