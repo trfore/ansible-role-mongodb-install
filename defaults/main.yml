@@ -48,7 +48,6 @@ mongodb_root_backup_name: BackupUser           # Name of the user for backup tas
 mongodb_root_backup_password: passw01d         # Password for the user for backup tasks
 
 # auth initialization variables
-mongodb_pymongo_from_pip: true                 # Install latest PyMongo via PIP or package manager
 mongodb_pymongo_pip_version: null              # Set PyMongo Version, default will install latest
 mongodb_pymongo_package: python3-pymongo
 

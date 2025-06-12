@@ -1,19 +1,35 @@
-- name: Install python3 venv tools
+- name: Ensure python3 and pip are installed
   ansible.builtin.package:
     name:
-      - "{{ (ansible_pkg_mgr == 'apt') | ternary('python3-venv', 'python3-virtualenv') }}"
-      - python3-packaging # required for debian installs
+      - python3
+      - "{{ 'python3-pip' if ansible_os_family in ['RedHat', 'Debian'] else omit }}"
     state: present
 
-- name: Ensure python3 is installed
+# Different approaches for virtualenv installation based on OS:
+# - On CentOS 9: venv is already included in python3, no need for python3-venv
+# - On Ubuntu/Debian: need to install python3-venv package
+
+- name: Determine if venv is usable
+  ansible.builtin.set_fact:
+    venv_supported: "{{ (ansible_os_family == 'Debian') or (ansible_distribution in ['CentOS', 'RedHat'] and ansible_distribution_major_version|int >= 8) }}"
+
+- name: Install python3 packages on Debian-based systems
   ansible.builtin.package:
-    name: python3
+    name: "{{ python3_packages }}"
     state: present
+  when: ansible_os_family == 'Debian'
 
 - name: Create virtualenv
-  ansible.builtin.command: python3 -m venv /opt/mongodb_venv
+  ansible.builtin.command: >
+    {{ 'python3 -m venv /opt/mongodb_venv' if venv_supported else 'virtualenv /opt/mongodb_venv' }}
   args:
     creates: /opt/mongodb_venv
+
+- name: Ensure pip exists in venv
+  ansible.builtin.command: /opt/mongodb_venv/bin/python -m ensurepip --upgrade
+  args:
+    creates: /opt/mongodb_venv/bin/pip
+  when: venv_supported
 
 - name: Install pymongo into virtualenv
   ansible.builtin.pip:

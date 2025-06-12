@@ -236,7 +236,8 @@ Set these to automatically create users during provisioning. If `mongodb_securit
     mongodb_config:
       processManagement:
         fork: false
-
+      systemLog:
+        verbosity: 0
   roles:
     - name: Install MongoDB
       role: trfore.mongodb_install

@@ -4,6 +4,20 @@
     name: "{{ hostname }}"
   when: hostname is defined
 
+# Check if libcurl is already installed in the system
+# On RHEL 9, libcurl is pre-installed, and installing libcurl-minimal would cause errors
+
+- name: Gather package facts
+  ansible.builtin.package_facts:
+    manager: auto
+
+- name: Check for libcurl and add libcurl-minimal if needed
+  ansible.builtin.set_fact:
+    mongodb_dependencies: "{{ mongodb_dependencies + ['libcurl-minimal'] }}"
+  when: 
+    - ansible_os_family == 'RedHat'
+    - ansible_facts.packages['libcurl'] is not defined
+
 - name: Disable transparent huge pages on systemd systems
   ansible.builtin.include_tasks: disable_transparent_hugepages.yml
   when:

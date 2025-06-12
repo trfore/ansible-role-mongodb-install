@@ -16,3 +16,7 @@ mongodb_pkg_hold_list:
   - mongodb-mongosh
   - mongodb-org-database-tools-extra
   - mongodb-database-tools
+
+python3_packages:
+  - python3-venv
+  - python3-packaging
