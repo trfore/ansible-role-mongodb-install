@@ -28,13 +28,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-<<<<<<< main
-        distro: [centos9, debian11, ubuntu2204]
-        version: ["6.0.23"]
-=======
         distro: [centos9, debian11, ubuntu2004, ubuntu2204]
         version: ["6.0.24"]
->>>>>>> main
         molecule_scenario: ["-s default"]
     uses: ./.github/workflows/test.yml
     with:
@@ -49,13 +44,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-<<<<<<< main
-        distro: [centos9, debian11, debian12, ubuntu2204]
-        version: ["7.0.20"]
-=======
         distro: [centos9, debian11, debian12, ubuntu2004, ubuntu2204]
         version: ["7.0.21"]
->>>>>>> main
         molecule_scenario: ["-s default"]
     uses: ./.github/workflows/test.yml
     with:
@@ -70,13 +60,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-<<<<<<< main
         distro: [centos9, debian12, ubuntu2404]
-        version: ["8.0.9"]
-=======
-        distro: [centos9, debian12, ubuntu2004, ubuntu2204, ubuntu2404]
-        version: ["8.0.10"]
->>>>>>> main
+        version: ["8.0.11"]
         molecule_scenario: ["-s default"]
     uses: ./.github/workflows/test.yml
     with:
