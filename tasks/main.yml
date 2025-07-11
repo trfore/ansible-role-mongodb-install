@@ -1,4 +1,37 @@
 ---
+- name: Set a hostname
+  ansible.builtin.hostname:
+    name: "{{ hostname }}"
+  when: hostname is defined
+
+# Check if libcurl is already installed in the system
+# On RHEL 9, libcurl is pre-installed, and installing libcurl-minimal would cause errors
+
+- name: Gather package facts
+  ansible.builtin.package_facts:
+    manager: auto
+
+- name: Check for libcurl and add libcurl-minimal if needed
+  ansible.builtin.set_fact:
+    mongodb_dependencies: "{{ mongodb_dependencies + ['libcurl-minimal'] }}"
+  when: 
+    - ansible_os_family == 'RedHat'
+    - ansible_facts.packages['libcurl'] is not defined
+
+- name: Disable transparent huge pages on systemd systems
+  ansible.builtin.include_tasks: disable_transparent_hugepages.yml
+  when:
+    - mongodb_transparent_hugepages_optimization | bool
+    - ansible_service_mgr == "systemd"
+    - mongodb_version_maj in ["4", "5", "6", "7"]
+
+- name: Enable transparent huge pages on systemd systems
+  ansible.builtin.include_tasks: enable_transparent_hugepages.yml
+  when:
+    - mongodb_transparent_hugepages_optimization | bool
+    - ansible_service_mgr == "systemd"
+    - mongodb_version_maj in ["8"]
+
 - name: Install essential packages and set OS specific variables
   ansible.builtin.include_tasks: "{{ ansible_os_family | lower }}.yml"
 
@@ -44,3 +77,7 @@
   when:
     - not mongodb_pkg_install
     - not mongodb_local_binary.stat.exists
+
+- name: Enable Security Authorization and Create Users
+  ansible.builtin.include_tasks: auth_init.yml
+  when: mongodb_security_authorization == "enabled"

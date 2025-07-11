@@ -3,6 +3,5 @@
 mongodb_path_db: /var/lib/mongo
 mongodb_path_log: /var/log/mongodb
 mongodb_dependencies:
-  - libcurl-minimal
   - openssl
   - xz-libs

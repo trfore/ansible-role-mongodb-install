@@ -1,3 +1,5 @@
+{{ ansible_managed | comment }}
+
 # mongod.conf
 
 # for documentation of all options, see:
@@ -6,31 +8,105 @@
 # Where and how to store data.
 storage:
   dbPath: {{ mongodb_path_db }}
+{% if mongodb_version_maj not in ["7", "8"] %}
   journal:
-    enabled: true
+    enabled: {{ mongodb_storage_journal_enabled | to_nice_json }}
+{% endif %}
 #  engine:
 #  mmapv1:
 #  wiredTiger:
+{% if mongodb_config['storage'] is defined and mongodb_config['storage'] is iterable %}
+{% for key, value in mongodb_config['storage'].items() %}
+{% if value is mapping %}
+  {{ key }}:
+{% for subkey, subval in value.items() %}
+    {{ subkey }}: {{ subval }}
+{% endfor %}
+{% else %}
+  {{ key }}: {{ value | lower }}
+{% endif %}
+{% endfor %}
+{% endif %}
 
 # where to write logging data.
 systemLog:
   destination: file
   logAppend: true
   path: {{ mongodb_path_log }}/mongod.log
+{% if mongodb_config['systemLog'] is defined and mongodb_config['systemLog'] is iterable %}
+{% for key, value in mongodb_config['systemLog'].items() %}
+{% if value is mapping %}
+  {{ key }}:
+{% for subkey, subval in value.items() %}
+    {{ subkey }}: {{ subval }}
+{% endfor %}
+{% else %}
+  {{ key }}: {{ value | lower }}
+{% endif %}
+{% endfor %}
+{% endif %}
 
 # network interfaces
 net:
-  port: 27017
-  bindIp: 127.0.0.1
+  port: {{ mongodb_net_port }}
+  bindIp: {{ mongodb_net_bindip }}
+  {% if mongodb_net_ssl_pemfile is defined and mongodb_net_ssl_mode is defined and mongodb_net_ssl == 'enabled' -%}
+  ssl:
+    mode: {{ mongodb_net_ssl_mode }}
+    PEMKeyFile: {{ mongodb_net_ssl_pemfile }}
+  {%- endif %}
+{% if mongodb_config['net'] is defined and mongodb_config['net'] is iterable %}
+{% for key, value in mongodb_config['net'].items() %}
+{% if value is mapping %}
+  {{ key }}:
+{% for subkey, subval in value.items() %}
+    {{ subkey }}: {{ subval }}
+{% endfor %}
+{% else %}
+  {{ key }}: {{ value | lower }}
+{% endif %}
+{% endfor %}
+{% endif %}
+
 
 # how the process runs
 processManagement:
   timeZoneInfo: /usr/share/zoneinfo
+{% if mongodb_config['processManagement'] is defined and mongodb_config['processManagement'] is iterable %}
+{% for key, value in mongodb_config['processManagement'].items() %}
+{% if value is mapping %}
+  {{ key }}:
+{% for subkey, subval in value.items() %}
+    {{ subkey }}: {{ subval }}
+{% endfor %}
+{% else %}
+  {{ key }}: {{ value | lower }}
+{% endif %}
+{% endfor %}
+{% endif %}
 
-#security:
+security:
+  authorization: {{ mongodb_security_authorization }}
+  javascriptEnabled: {{ mongodb_security_javascript_enabled | to_nice_json }}
+{% if mongodb_config['security'] is defined and mongodb_config['security'] is iterable %}
+{% for key, value in mongodb_config['security'].items() %}
+{% if value is mapping %}
+  {{ key }}:
+{% for subkey, subval in value.items() %}
+    {{ subkey }}: {{ subval }}
+{% endfor %}
+{% else %}
+  {{ key }}: {{ value | lower }}
+{% endif %}
+{% endfor %}
+{% endif %}
 
 #operationProfiling:
 
 #replication:
 
 #sharding:
+
+## Enterprise-Only Options:
+
+#auditLog:

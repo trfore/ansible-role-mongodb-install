@@ -1,3 +1,4 @@
+{{ ansible_managed | comment }}
 [Unit]
 Description=MongoDB Database Server
 Documentation=https://docs.mongodb.org/manual
@@ -17,9 +18,9 @@ LimitCPU=infinity
 # virtual memory size
 LimitAS=infinity
 # open files
-LimitNOFILE=64000
+LimitNOFILE={{ mongodb_systemd_unit_limit_nofile }}
 # processes/threads
-LimitNPROC=64000
+LimitNPROC={{ mongodb_systemd_unit_limit_nproc }}
 # locked memory
 LimitMEMLOCK=infinity
 # total threads (user+kernel)
