@@ -145,12 +145,12 @@ Set these to automatically create users during provisioning. If `mongodb_securit
 
 `vars/redhat.yml` and `vars/redhat_mongo_v{4-6}.yml`:
 
-| Variable              | Default                                   | Description                                                         | Required |
-| --------------------- | ----------------------------------------- | ------------------------------------------------------------------- | -------- |
-| mongodb_path_db       | `/var/lib/mongo`                          | PATH, MongoDB database folder (tar install)                         | No       |
-| mongodb_path_log      | `/var/log/mongodb`                        | PATH, MongoDB log folder (tar install)                              | No       |
-| mongodb_dependencies  | `["libcurl-minimal","openssl","xz-libs"]` | Required packages for MongoDB (tar install)                         | No       |
-| mongodb_pkg_hold_list | MongoDB Packages                          | List of MongoDB packages installed from `mongodb-org` (pkg install) | No       |
+| Variable              | Default                 | Description                                                         | Required |
+| --------------------- | ----------------------- | ------------------------------------------------------------------- | -------- |
+| mongodb_path_db       | `/var/lib/mongo`        | PATH, MongoDB database folder (tar install)                         | No       |
+| mongodb_path_log      | `/var/log/mongodb`      | PATH, MongoDB log folder (tar install)                              | No       |
+| mongodb_dependencies  | `["openssl","xz-libs"]` | Required packages for MongoDB (tar install)                         | No       |
+| mongodb_pkg_hold_list | MongoDB Packages        | List of MongoDB packages installed from `mongodb-org` (pkg install) | No       |
 
 ## Example Playbooks
 
