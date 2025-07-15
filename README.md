@@ -3,12 +3,7 @@
 [![CI](https://github.com/trfore/ansible-role-mongodb-install/actions/workflows/ci.yml/badge.svg)](https://github.com/trfore/ansible-role-mongodb-install/actions/workflows/ci.yml)
 [![CD](https://github.com/trfore/ansible-role-mongodb-install/actions/workflows/cd.yml/badge.svg?branch=main)](https://github.com/trfore/ansible-role-mongodb-install/actions/workflows/cd.yml)
 
-This role installs the MongoDB Community edition server metapackage, `mongodb-org`, via the OS's package manager (default) or the server binaries via tar file. It currently defaults to installing the **latest release from version 7**, you can install a newer major version by setting `mongodb_version: 8.0.11`, see 'Tested Platforms and Versions' section for a compatibility matrix.
-
-Alternatively, you can install the MongoDB server binaries - `mongo`, `mongod`, `mongos`, by setting `mongodb_pkg_install: false` and the role will download the **latest tarball from version 7** or a newer major version by setting `mongodb_version`. If you would like to install the binary from your local Ansible control host, download the appropriate tar file, `mongodb-linux-x86_64-{DISTRO}-{VERSION}.tgz`, to your `files` directory and set the following two variables in your playbook:
-
-- `mongodb_tar_src: mongodb-linux-x86_64-{DISTRO}-{VERSION}.tgz`
-- `mongodb_tar_src_remote: false`
+This role installs the MongoDB Community edition server metapackage, `mongodb-org`, via the OS's package manager. It currently defaults to installing the **latest release from version 7**, you can install a newer major version by setting `mongodb_version: 8.0.11`, see 'Tested Platforms and Versions' section for a compatibility matrix.
 
 See [Example Playbooks](#example-playbooks) for working examples. This role **does not configure the server**, it uses the default configuration values and minimal recommended `ulimit` settings. Its recommended to configure the server for production use, for details see: https://www.mongodb.com/docs/manual/administration/production-notes/
 
@@ -81,7 +76,6 @@ Common variables are listed below, along with default values (see `defaults/main
 
 | Variable                                   | Default    | Description                                                                                               | Required  |
 | ------------------------------------------ | ---------- | --------------------------------------------------------------------------------------------------------- | --------- |
-| mongodb_pkg_install                        | `true`     | Boolean, `true` to install MongoDB via package manager                                                    | No        |
 | mongodb_version                            | `7.0.21`   | MongoDB Community stable releases `v4.4`, `v5`, `v6`, `v7`, `v8`                                          | No        |
 | mongodb_version_maj                        | Automatic  | Extracts major value from `mongodb_version`                                                               | Automatic |
 | mongodb_version_maj_minor                  | Automatic  | Extracts major and minor values from `mongodb_version`                                                    | Automatic |
@@ -98,16 +92,6 @@ Common variables are listed below, along with default values (see `defaults/main
 | mongodb_gpg_key       | URL              | MongoDB GPG Key                                                       | No       |
 | mongodb_pkg_hold      | `true`           | Boolean, `true` to hold package version                               | No       |
 | mongodb_pkg_hold_list | MongoDB Packages | List of MongoDB packages installed from `mongodb-org`, `v4.4` to `v7` | No       |
-
-### Binary Install Variables
-
-`defaults/main.yml`:
-
-| Variable               | Default    | Description                                                           | Required |
-| ---------------------- | ---------- | --------------------------------------------------------------------- | -------- |
-| mongodb_tar_src        | URL        | URL or relative PATH, MongoDB Community binary tar file (tar install) | No       |
-| mongodb_tar_src_remote | `true`     | Boolean, `true` if downloading from URL (tar install)                 | No       |
-| mongodb_path_exec      | `/usr/bin` | PATH, MongoDB binary path (tar install)                               | No       |
 
 ### User Creation Variables
 
@@ -136,21 +120,21 @@ Set these to automatically create users during provisioning. If `mongodb_securit
 
 `vars/debian.yml`:
 
-| Variable              | Default                             | Description                                                         | Required |
-| --------------------- | ----------------------------------- | ------------------------------------------------------------------- | -------- |
-| mongodb_path_db       | `/var/lib/mongodb`                  | PATH, MongoDB database folder (tar install)                         | No       |
-| mongodb_path_log      | `/var/log/mongodb`                  | PATH, MongoDB log folder (tar install)                              | No       |
-| mongodb_dependencies  | `["libcurl4","openssl","liblzma5"]` | Required packages for MongoDB (tar install)                         | No       |
-| mongodb_pkg_hold_list | MongoDB Packages                    | List of MongoDB packages installed from `mongodb-org` (pkg install) | No       |
+| Variable              | Default                             | Description                                           | Required |
+| --------------------- | ----------------------------------- | ----------------------------------------------------- | -------- |
+| mongodb_path_db       | `/var/lib/mongodb`                  | PATH, MongoDB database folder                         | No       |
+| mongodb_path_log      | `/var/log/mongodb`                  | PATH, MongoDB log folder                              | No       |
+| mongodb_dependencies  | `["libcurl4","openssl","liblzma5"]` | Required packages for MongoDB                         | No       |
+| mongodb_pkg_hold_list | MongoDB Packages                    | List of MongoDB packages installed from `mongodb-org` | No       |
 
-`vars/redhat.yml` and `vars/redhat_mongo_v{4-6}.yml`:
+`vars/redhat.yml` and `vars/redhat_mongo_v{4-8}.yml`:
 
-| Variable              | Default                 | Description                                                         | Required |
-| --------------------- | ----------------------- | ------------------------------------------------------------------- | -------- |
-| mongodb_path_db       | `/var/lib/mongo`        | PATH, MongoDB database folder (tar install)                         | No       |
-| mongodb_path_log      | `/var/log/mongodb`      | PATH, MongoDB log folder (tar install)                              | No       |
-| mongodb_dependencies  | `["openssl","xz-libs"]` | Required packages for MongoDB (tar install)                         | No       |
-| mongodb_pkg_hold_list | MongoDB Packages        | List of MongoDB packages installed from `mongodb-org` (pkg install) | No       |
+| Variable              | Default                 | Description                                           | Required |
+| --------------------- | ----------------------- | ----------------------------------------------------- | -------- |
+| mongodb_path_db       | `/var/lib/mongo`        | PATH, MongoDB database folder                         | No       |
+| mongodb_path_log      | `/var/log/mongodb`      | PATH, MongoDB log folder                              | No       |
+| mongodb_dependencies  | `["openssl","xz-libs"]` | Required packages for MongoDB                         | No       |
+| mongodb_pkg_hold_list | MongoDB Packages        | List of MongoDB packages installed from `mongodb-org` | No       |
 
 ## Example Playbooks
 
@@ -168,35 +152,7 @@ Set these to automatically create users during provisioning. If `mongodb_securit
 - hosts: servers
   become: true
   vars:
-    mongodb_pkg_install: true
     mongodb_version: "8.0.11"
-  roles:
-    - name: Install MongoDB
-      role: trfore.mongodb_install
-```
-
-- Binary install from tar file.
-
-```yaml
-- hosts: servers
-  become: true
-  vars:
-    mongodb_pkg_install: false
-    mongodb_version: "8.0.11"
-  roles:
-    - name: Install MongoDB
-      role: trfore.mongodb_install
-```
-
-- Binary install from tar file, if you manually download the tarball to your control host.
-
-```yaml
-- hosts: servers
-  become: true
-  vars:
-    mongodb_pkg_install: false
-    mongodb_tar_src: mongodb-linux-x86_64-debian12-7.0.21.tgz
-    mongodb_tar_src_remote: false
   roles:
     - name: Install MongoDB
       role: trfore.mongodb_install
@@ -209,7 +165,6 @@ Set these to automatically create users during provisioning. If `mongodb_securit
   become: true
   vars:
     hostname: "mongodb-test"
-    mongodb_pkg_install: true
     mongodb_version: "8.0.9"
     mongodb_net_bindip: "127.0.0.1"
     mongodb_net_port: "27017"
