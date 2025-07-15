@@ -4,3 +4,32 @@
     name: mongod
     enabled: true
     state: started
+
+- name: Run disable-transparent-hugepages
+  ansible.builtin.systemd:
+    name: disable-transparent-hugepages
+    enabled: true
+    state: started
+    daemon_reload: yes
+
+- name: Run enable-transparent-hugepages
+  ansible.builtin.systemd:
+    name: enable-transparent-hugepages
+    enabled: true
+    state: started
+    daemon_reload: yes
+
+# Handlers were merged into a single included task file to ensure correct execution order.
+# This is necessary because Ansible does not guarantee the order of multiple handlers triggered via `notify`.
+# Internally, `notify` stores handler names in a Python `set`, which is an unordered data structure.
+# As a result, handlers like "Mongodb restart" and "Wait when mongodb is started" may be executed in unpredictable order.
+# By combining them into one handler, we ensure MongoDB is restarted first and only then waited on for availability.
+
+
+- name: Restart and wait for MongoDB
+  ansible.builtin.include_tasks: restart_and_wait.yml
+  listen: Restart and wait for MongoDB
+
+- name: Restart and wait for MongoDB on localhost
+  ansible.builtin.include_tasks: restart_and_wait_on_localhost.yml
+  listen: Restart and wait for MongoDB on localhost

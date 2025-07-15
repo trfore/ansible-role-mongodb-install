@@ -9,3 +9,6 @@ venv.bak/
 
 # formatted by antsibull-changelog
 changelogs/changelog.yaml
+
+# aligned comments
+defaults/main.yml

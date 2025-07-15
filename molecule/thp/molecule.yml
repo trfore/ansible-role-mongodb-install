@@ -20,7 +20,7 @@ provisioner:
   playbooks:
     converge: ${MOLECULE_PLAYBOOK:-converge.yml}
   env:
-    MONGODB_VERSION: ${MOLECULE_MONGODB_VERSION:-"7.0.21"}
+    MONGODB_VERSION: ${MOLECULE_MONGODB_VERSION:-"8.0.9"}
 verifier:
   name: testinfra
   options:

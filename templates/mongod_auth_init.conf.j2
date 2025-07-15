@@ -1,0 +1,41 @@
+{{ ansible_managed | comment }}
+
+# mongod.conf
+
+# for documentation of all options, see:
+#   http://docs.mongodb.org/manual/reference/configuration-options/
+
+# Where and how to store data.
+storage:
+  dbPath: {{ mongodb_path_db }}
+  {% if mongodb_version_maj not in ["7", "8"] %}
+  journal:
+    enabled: {{ mongodb_storage_journal_enabled | to_nice_json }}
+  {% endif %}
+#  engine:
+#  mmapv1:
+#  wiredTiger:
+
+# where to write logging data.
+systemLog:
+  destination: file
+  logAppend: true
+  path: {{ mongodb_path_log }}/mongod.log
+
+# network interfaces
+net:
+  port: {{ mongodb_net_port }}
+  bindIp: '0.0.0.0'
+
+# how the process runs
+processManagement:
+  timeZoneInfo: /usr/share/zoneinfo
+
+security:
+  authorization: 'disabled'
+
+#operationProfiling:
+
+#replication:
+
+#sharding:

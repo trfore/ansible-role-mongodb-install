@@ -1,0 +1,48 @@
+---
+- name: Converge
+  hosts: all
+  become: true
+  vars:
+    mongodb_pkg_install: true
+    mongodb_version: "{{ lookup('env', 'MONGODB_VERSION') }}"
+
+    # TODO this currently does not work with Docker, due to /etc/host being read-only. Do the molecule file work-around
+    # or consider using ansible magic vars
+    # hostname: "mongodb-test"
+
+    mongodb_net_bindip: "127.0.0.1"
+    mongodb_net_port: "27018"
+
+    mongodb_user_admin_name: main-admin
+    mongodb_user_admin_password: "mainpassw01d"
+
+    mongodb_root_admin_name: root-admin
+    mongodb_root_admin_password: "rootpassw01d"
+
+    mongodb_root_backup_name: backup-user
+    mongodb_root_backup_password: "backuppassw01d"
+
+    mongodb_security_authorization: "enabled"
+    disable_logging_for_auth: true
+
+    mongodb_systemd_unit_limit_nofile: 64000
+    mongodb_systemd_unit_limit_nproc: 64000
+
+    mongodb_transparent_hugepages_optimization: true
+
+    mongodb_config:
+      processManagement:
+        fork: false
+
+  pre_tasks:
+    - name: Update APT cache
+      ansible.builtin.apt:
+        update_cache: true
+        cache_valid_time: 600
+      when: ansible_os_family == 'Debian'
+      changed_when: false
+
+  tasks:
+    - name: "Include ansible-role-mongodb-install"
+      ansible.builtin.include_role:
+        name: "ansible-role-mongodb-install"
