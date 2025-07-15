@@ -257,6 +257,8 @@ Special thanks to all those who have contributed to the project:
 
 - [ku9nov](https://github.com/ku9nov)
 
+Interested in adding a feature or fixing a bug? Checkout the [contributing guide](CONTRIBUTING.md)!
+
 ## Related Roles & Playbooks
 
 | Github                         | Ansible Galaxy           |
