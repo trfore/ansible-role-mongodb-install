@@ -32,7 +32,6 @@ pre-commit install
 ## Local Testing
 
 - A local installation of [Docker](https://docs.docker.com/engine/installation/) is required to run the `molecule` test scenarios.
-- TODO Important: When testing THP scenarios, XXX host environment is modified.... the systemd enabled containers run in a privileged mode, therefore XXX
 
 ### Using Tox
 
