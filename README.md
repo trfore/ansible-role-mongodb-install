@@ -34,19 +34,19 @@ roles:
 
 - CentOS Stream 9
 - Debian 12
-- Ubuntu 20.04, 22.04 & 24.04
+- Ubuntu 22.04 & 24.04
 
 ### MongoDB Community `7.0.21`
 
 - CentOS Stream 9
 - Debian 11 & 12
-- Ubuntu 20.04 & 22.04
+- Ubuntu 22.04
 
 ### MongoDB Community `6.0.24`
 
 - CentOS Stream 9
 - Debian 11
-- Ubuntu 20.04 & 22.04
+- Ubuntu 22.04
 
 ### MongoDB Community `5.0.31` (EOL October 2024)
 
