@@ -165,7 +165,7 @@ Set these to automatically create users during provisioning. If `mongodb_securit
   become: true
   vars:
     hostname: "mongodb-test"
-    mongodb_version: "8.0.9"
+    mongodb_version: "8.0.11"
     mongodb_net_bindip: "127.0.0.1"
     mongodb_net_port: "27017"
 
