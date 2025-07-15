@@ -3,7 +3,6 @@
   hosts: all
   become: true
   vars:
-    mongodb_pkg_install: true
     mongodb_version: "{{ lookup('env', 'MONGODB_VERSION') }}"
 
     # TODO this currently does not work with Docker, due to /etc/host being read-only. Do the molecule file work-around
