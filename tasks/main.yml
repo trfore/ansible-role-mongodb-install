@@ -14,7 +14,7 @@
 - name: Check for libcurl and add libcurl-minimal if needed
   ansible.builtin.set_fact:
     mongodb_dependencies: "{{ mongodb_dependencies + ['libcurl-minimal'] }}"
-  when: 
+  when:
     - ansible_os_family == 'RedHat'
     - ansible_facts.packages['libcurl'] is not defined
 
