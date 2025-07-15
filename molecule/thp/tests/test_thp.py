@@ -4,7 +4,13 @@ from pathlib import Path
 
 
 def test_config_file(host):
-    expected = Path(__file__).with_name("expected_mongo.conf")
+    host_os = host.ansible("setup")["ansible_facts"]["ansible_os_family"]
+
+    if host_os == "RedHat":
+        filename = "thp_mongo_rhel.conf"
+    else:
+        filename = "thp_mongo.conf"
+    expected = Path(__file__).with_name(filename)
     assert (
         expected.read_text(encoding="utf-8")
         == host.file("/etc/mongod.conf").content_string

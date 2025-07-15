@@ -8,8 +8,14 @@ mongodb_version_maj = re.search(r"\d+", mongodb_version).group()
 
 
 def test_config_file(host):
-    if mongodb_version_maj >= "7":
+    host_os = host.ansible("setup")["ansible_facts"]["ansible_os_family"]
+
+    if mongodb_version_maj >= "7" and host_os != "RedHat":
         filename = "default_mongo7+.conf"
+    elif mongodb_version_maj >= "7" and host_os == "RedHat":
+        filename = "rhel_mongo7+.conf"
+    elif mongodb_version_maj == "6" and host_os == "RedHat":
+        filename = "rhel_mongo6.conf"
     else:
         filename = "default_mongo6.conf"
     expected = Path(__file__).with_name(filename)

@@ -34,19 +34,19 @@ roles:
 
 - CentOS Stream 9
 - Debian 12
-- Ubuntu 20.04, 22.04 & 24.04
+- Ubuntu 22.04 & 24.04
 
 ### MongoDB Community `7.0.21`
 
 - CentOS Stream 9
 - Debian 11 & 12
-- Ubuntu 20.04 & 22.04
+- Ubuntu 22.04
 
 ### MongoDB Community `6.0.24`
 
 - CentOS Stream 9
 - Debian 11
-- Ubuntu 20.04 & 22.04
+- Ubuntu 22.04
 
 ### MongoDB Community `5.0.31` (EOL October 2024)
 
@@ -145,12 +145,12 @@ Set these to automatically create users during provisioning. If `mongodb_securit
 
 `vars/redhat.yml` and `vars/redhat_mongo_v{4-6}.yml`:
 
-| Variable              | Default                                   | Description                                                         | Required |
-| --------------------- | ----------------------------------------- | ------------------------------------------------------------------- | -------- |
-| mongodb_path_db       | `/var/lib/mongo`                          | PATH, MongoDB database folder (tar install)                         | No       |
-| mongodb_path_log      | `/var/log/mongodb`                        | PATH, MongoDB log folder (tar install)                              | No       |
-| mongodb_dependencies  | `["libcurl-minimal","openssl","xz-libs"]` | Required packages for MongoDB (tar install)                         | No       |
-| mongodb_pkg_hold_list | MongoDB Packages                          | List of MongoDB packages installed from `mongodb-org` (pkg install) | No       |
+| Variable              | Default                 | Description                                                         | Required |
+| --------------------- | ----------------------- | ------------------------------------------------------------------- | -------- |
+| mongodb_path_db       | `/var/lib/mongo`        | PATH, MongoDB database folder (tar install)                         | No       |
+| mongodb_path_log      | `/var/log/mongodb`      | PATH, MongoDB log folder (tar install)                              | No       |
+| mongodb_dependencies  | `["openssl","xz-libs"]` | Required packages for MongoDB (tar install)                         | No       |
+| mongodb_pkg_hold_list | MongoDB Packages        | List of MongoDB packages installed from `mongodb-org` (pkg install) | No       |
 
 ## Example Playbooks
 
@@ -249,9 +249,15 @@ This Ansible role is MIT.
 
 MongoDB Community is Server Side Public License software from MongoDB, Inc. For additional information see: https://www.mongodb.com/licensing/server-side-public-license
 
-## Author Information
+## Contributors
 
-Taylor Fore (https://github.com/trfore)
+- [trfore](https://github.com/trfore) - original author and maintainer
+
+Special thanks to all those who have contributed to the project:
+
+- [ku9nov](https://github.com/ku9nov)
+
+Interested in adding a feature or fixing a bug? Checkout the [contributing guide](CONTRIBUTING.md)!
 
 ## Related Roles & Playbooks
 

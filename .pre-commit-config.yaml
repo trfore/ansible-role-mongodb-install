@@ -12,6 +12,7 @@ repos:
         args: [--branch, main]
       - id: trailing-whitespace
         args: [--markdown-linebreak-ext=md]
+        exclude: (^molecule/thp/tests/thp_mongo.conf|^molecule/thp/tests/thp_mongo_rhel.conf)
 
   - repo: https://github.com/trfore/pre-commit
     rev: v1.5.3
