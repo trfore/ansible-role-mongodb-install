@@ -19,17 +19,21 @@
     state: started
     daemon_reload: yes
 
-# Handlers were merged into a single included task file to ensure correct execution order.
-# This is necessary because Ansible does not guarantee the order of multiple handlers triggered via `notify`.
-# Internally, `notify` stores handler names in a Python `set`, which is an unordered data structure.
-# As a result, handlers like "Mongodb restart" and "Wait when mongodb is started" may be executed in unpredictable order.
-# By combining them into one handler, we ensure MongoDB is restarted first and only then waited on for availability.
+- name: Restart MongoDB
+  ansible.builtin.service:
+    name: mongod
+    state: restarted
 
+- name: Wait for MongoDB
+  ansible.builtin.wait_for:
+    host: "{{ item }}"
+    port: "{{ mongodb_net_port }}"
+    timeout: 30
+  with_items: "{{ mongodb_net_bindip.split(',') | map('replace', '0.0.0.0', '127.0.0.1') | list }}"
 
-- name: Restart and wait for MongoDB
-  ansible.builtin.include_tasks: restart_and_wait.yml
-  listen: Restart and wait for MongoDB
-
-- name: Restart and wait for MongoDB on localhost
-  ansible.builtin.include_tasks: restart_and_wait_on_localhost.yml
-  listen: Restart and wait for MongoDB on localhost
+- name: Wait for MongoDB on localhost
+  ansible.builtin.wait_for:
+    host: "127.0.0.1"
+    port: "{{ mongodb_net_port }}"
+    delay: 5
+    timeout: 120

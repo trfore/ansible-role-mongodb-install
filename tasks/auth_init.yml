@@ -43,7 +43,8 @@
         group: root
         mode: 0644
       notify:
-        - Restart and wait for MongoDB on localhost
+        - Restart MongoDB
+        - Wait for MongoDB on localhost
 
     - name: Flush all handlers at this point
       ansible.builtin.meta: flush_handlers
@@ -123,7 +124,8 @@
     group: root
     mode: 0644
   notify:
-    - Restart and wait for MongoDB
+    - Restart MongoDB
+    - Wait for MongoDB
 
 - name: Flush all handlers at this point
   ansible.builtin.meta: flush_handlers
