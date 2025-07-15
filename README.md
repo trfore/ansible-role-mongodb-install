@@ -249,9 +249,13 @@ This Ansible role is MIT.
 
 MongoDB Community is Server Side Public License software from MongoDB, Inc. For additional information see: https://www.mongodb.com/licensing/server-side-public-license
 
-## Author Information
+## Contributors
 
-Taylor Fore (https://github.com/trfore)
+- [trfore](https://github.com/trfore) - original author and maintainer
+
+Special thanks to all those who have contributed to the project:
+
+- [ku9nov](https://github.com/ku9nov)
 
 ## Related Roles & Playbooks
 
