@@ -37,7 +37,7 @@ roles:
 - Debian 11 & 12
 - Ubuntu 22.04
 
-### MongoDB Community `6.0.24`
+### MongoDB Community `6.0.25`
 
 - CentOS Stream 9
 - Debian 11
