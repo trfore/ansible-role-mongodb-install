@@ -31,7 +31,7 @@ roles:
 - Debian 12
 - Ubuntu 22.04 & 24.04
 
-### MongoDB Community `7.0.21`
+### MongoDB Community `7.0.22`
 
 - CentOS Stream 9
 - Debian 11 & 12
@@ -76,7 +76,7 @@ Common variables are listed below, along with default values (see `defaults/main
 
 | Variable                                   | Default    | Description                                                                                               | Required  |
 | ------------------------------------------ | ---------- | --------------------------------------------------------------------------------------------------------- | --------- |
-| mongodb_version                            | `7.0.21`   | MongoDB Community stable releases `v4.4`, `v5`, `v6`, `v7`, `v8`                                          | No        |
+| mongodb_version                            | `7.0.22`   | MongoDB Community stable releases `v4.4`, `v5`, `v6`, `v7`, `v8`                                          | No        |
 | mongodb_version_maj                        | Automatic  | Extracts major value from `mongodb_version`                                                               | Automatic |
 | mongodb_version_maj_minor                  | Automatic  | Extracts major and minor values from `mongodb_version`                                                    | Automatic |
 | mongodb_transparent_hugepages_optimization | `false`    | Disable Transparent HugePages (THP) for MongoDB ≤ 7 or enable Transparent HugePages (THP) for MongoDB ≥ 8 | No        |
@@ -166,7 +166,7 @@ Set these to automatically create users during provisioning. If `mongodb_securit
   vars:
     hostname: "mongodb-test"
     mongodb_version: "8.0.11"
-    mongodb_net_bindip: "127.0.0.1"
+    mongodb_net_bindip: "127.0.22.1"
     mongodb_net_port: "27017"
 
     mongodb_user_admin_name: main-admin
