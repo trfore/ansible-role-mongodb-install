@@ -14,7 +14,7 @@ galaxy_info:
     - name: EL
       versions: ["8", "9"]
     - name: Ubuntu
-      versions: [focal, jammy]
+      versions: [focal, jammy, noble]
 
   galaxy_tags: [database, mongo, mongodb]
 
