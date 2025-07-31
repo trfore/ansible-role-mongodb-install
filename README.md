@@ -208,11 +208,8 @@ MongoDB Community is Server Side Public License software from MongoDB, Inc. For 
 
 - [trfore](https://github.com/trfore) - original author and maintainer
 
-Special thanks to all those who have contributed to the project:
-
-- [ku9nov](https://github.com/ku9nov)
-
-Interested in adding a feature or fixing a bug? Checkout the [contributing guide](CONTRIBUTING.md)!
+Special thanks to all those who have [contributed to the project](https://github.com/trfore/ansible-role-mongodb-install/graphs/contributors)!
+Interested in adding a feature or fixing a bug? Checkout the [contributing guide](CONTRIBUTING.md).
 
 ## Related Roles & Playbooks
 
