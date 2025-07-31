@@ -37,7 +37,7 @@ roles:
 - Debian 11 & 12
 - Ubuntu 22.04
 
-### MongoDB Community `6.0.25`
+### MongoDB Community `6.0.25` (EOL July 2025)
 
 - CentOS Stream 9
 - Debian 11
@@ -57,7 +57,7 @@ roles:
 
 ## Requirements
 
-- `ansible-core>=2.16.0`
+- `ansible-core>=2.17.0`
 
 ## Dependencies
 
