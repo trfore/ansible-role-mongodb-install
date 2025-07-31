@@ -57,7 +57,7 @@ roles:
 
 ## Requirements
 
-- `ansible-core>=2.16.0`
+- `ansible-core>=2.17.0`
 
 ## Dependencies
 
