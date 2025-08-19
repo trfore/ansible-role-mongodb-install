@@ -103,7 +103,19 @@ security:
 
 #operationProfiling:
 
-#replication:
+{% if mongodb_replication_replset -%}
+replication:
+  oplogSizeMB: {{ mongodb_replication_oplogsize | int }}
+  replSetName: {{ mongodb_replication_replset }}
+  {% if mongodb_storage_engine == 'mmapv1' -%}
+  secondaryIndexPrefetch: {{ mongodb_replication_replindexprefetch }}
+  {%- endif %}
+  {%- if mongodb_config['replication'] is defined and mongodb_config['replication'] is iterable %}
+  {%- for item in mongodb_config['replication'] -%}
+  {{ item }}
+  {% endfor %}
+  {% endif %}
+{% endif %}
 
 #sharding:
 

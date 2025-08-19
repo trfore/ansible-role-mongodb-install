@@ -31,6 +31,12 @@ mongodb_config:
 
 mongodb_storage_journal_enabled: true          # Enable/Disable journal
 
+## replication Options
+mongodb_replication_replset: ""                   # Enable replication
+mongodb_replication_replindexprefetch: "all"      # specify index prefetching behavior (if secondary) [none|_id_only|all]
+mongodb_replication_oplogsize: 1024               # specifies a maximum size in megabytes for the replication operation log
+mongodb_replicaset_members: []                    # list of members of a replica set.
+
 
 # names and passwords for administrative users
 mongodb_user_admin_name: UserAdmin             # Name of the user for administrative tasks

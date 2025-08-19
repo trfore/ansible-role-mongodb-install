@@ -1,0 +1,10 @@
+- name: Ensure replicaset exists
+  community.mongodb.mongodb_replicaset:
+    login_host: localhost
+    login_user: "{{ mongodb_user_admin_name | default(omit) }}"
+    login_password: "{{ mongodb_user_admin_password | default(omit) }}"
+    replica_set: "{{ mongodb_replication_replset }}"
+    members: "{{ mongodb_replicaset_members }}"
+  vars:
+    ansible_python_interpreter: /opt/mongodb_venv/bin/python
+  when: mongo_role == "arbiter"

@@ -59,4 +59,8 @@
 
 - name: Enable Security Authorization and Create Users
   ansible.builtin.include_tasks: auth_init.yml
-  when: mongodb_security_authorization == "enabled"
+  when: mongodb_security_authorization == "disabled"
+
+- name: Initialize MongoDB replicaset
+  ansible.builtin.include_tasks: replicaset.yml
+  when: mongodb_replication_replset is defined
