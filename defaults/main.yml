@@ -13,7 +13,7 @@ mongodb_systemd_unit_limit_nofile: 64000
 mongodb_systemd_unit_limit_nproc: 64000
 
 # network variables
-mongodb_net_bindip: 127.0.23.1                    # Comma separated list of ip addresses to listen on
+mongodb_net_bindip: 127.0.0.1                    # Comma separated list of ip addresses to listen on
 mongodb_net_port: 27017                          # Port to listen on
 mongodb_net_ssl: disabled                        # Enable or disable ssl connections
 mongodb_net_ssl_mode: ""                         # Set the ssl mode (RequireSSL / preferSSL / AllowSSL / disabled)
