@@ -3,7 +3,7 @@
 [![CI](https://github.com/trfore/ansible-role-mongodb-install/actions/workflows/ci.yml/badge.svg)](https://github.com/trfore/ansible-role-mongodb-install/actions/workflows/ci.yml)
 [![CD](https://github.com/trfore/ansible-role-mongodb-install/actions/workflows/cd.yml/badge.svg)](https://github.com/trfore/ansible-role-mongodb-install/actions/workflows/cd.yml)
 
-This role installs the MongoDB Community edition server metapackage, `mongodb-org`, via the OS's package manager. It currently defaults to installing the **latest release from version 7**, you can install a newer major version by setting `mongodb_version: 8.0.12`, see 'Tested Platforms and Versions' section for a compatibility matrix.
+This role installs the MongoDB Community edition server metapackage, `mongodb-org`, via the OS's package manager. It currently defaults to installing the **latest release from version 7**, you can install a newer major version by setting `mongodb_version: 8.0.13`, see 'Tested Platforms and Versions' section for a compatibility matrix.
 
 See [Example Playbooks](#example-playbooks) for working examples. This role **does not configure the server**, it uses the default configuration values and minimal recommended `ulimit` settings. Its recommended to configure the server for production use, for details see: https://www.mongodb.com/docs/manual/administration/production-notes/
 
@@ -25,7 +25,7 @@ roles:
 
 ## Tested Platforms and Versions
 
-### MongoDB Community `8.0.12`
+### MongoDB Community `8.0.13`
 
 - CentOS Stream 9
 - Debian 12
@@ -152,7 +152,7 @@ Set these to automatically create users during provisioning. If `mongodb_securit
 - hosts: servers
   become: true
   vars:
-    mongodb_version: "8.0.12"
+    mongodb_version: "8.0.13"
   roles:
     - name: Install MongoDB
       role: trfore.mongodb_install
@@ -165,7 +165,7 @@ Set these to automatically create users during provisioning. If `mongodb_securit
   become: true
   vars:
     hostname: "mongodb-test"
-    mongodb_version: "8.0.12"
+    mongodb_version: "8.0.13"
     mongodb_net_bindip: "127.0.0.1"
     mongodb_net_port: "27017"
 
