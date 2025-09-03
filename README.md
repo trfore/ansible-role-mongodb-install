@@ -2,11 +2,11 @@
 
 [![CI](https://github.com/trfore/ansible-role-mongodb-install/actions/workflows/ci.yml/badge.svg)](https://github.com/trfore/ansible-role-mongodb-install/actions/workflows/ci.yml)
 [![Prerelease](https://github.com/trfore/ansible-role-mongodb-install/actions/workflows/prerelease.yml/badge.svg)](https://github.com/trfore/ansible-role-mongodb-install/actions/workflows/prerelease.yml)
-[![Release](https://github.com/trfore/ansible-role-mongodb-install/actions/workflows/release.yml/badge.svg)](https://github.com/trfore/ansible-role-mongodb-install/actions/workflows/release.yml)
+[![Galaxy Release](https://github.com/trfore/ansible-role-mongodb-install/actions/workflows/release.yml/badge.svg)](https://github.com/trfore/ansible-role-mongodb-install/actions/workflows/release.yml)
 
 This role installs the MongoDB Community edition server metapackage, `mongodb-org`, via the OS's package manager. It currently defaults to installing the **latest release from version 7**, you can install a newer major version by setting `mongodb_version: 8.0.13`, see 'Tested Platforms and Versions' section for a compatibility matrix.
 
-See [Example Playbooks](#example-playbooks) for working examples. This role **does not configure the server**, it uses the default configuration values and minimal recommended `ulimit` settings. Its recommended to configure the server for production use, for details see: https://www.mongodb.com/docs/manual/administration/production-notes/
+See [Example Playbooks](#example-playbooks) for working examples. **The default settings do not configure the server**, it uses the default configuration values and minimal recommended `ulimit` settings. Its recommended to configure the server for production use, for details see: https://www.mongodb.com/docs/manual/administration/production-notes/
 
 ### Install the Role
 
@@ -21,7 +21,17 @@ You can also include it in a `requirements.yml` file and install it with `ansibl
 ```yaml
 ---
 roles:
-  - trfore.mongodb_install
+  - name: trfore.mongodb_install
+    version: v3.0.4 # optional
+
+collections:
+  # required when targeting CentOS & RHEL host
+  - name: community.general
+    source: https://galaxy.ansible.com
+
+  # required if using Transparent HugePages, e.g. 'mongodb_security_authorization: enable'
+  - name: community.mongodb
+    source: https://galaxy.ansible.com
 ```
 
 ## Tested Platforms and Versions
@@ -62,8 +72,8 @@ roles:
 
 ## Dependencies
 
-- `community.general.yum_versionlock` (for CentOS & RHEL target host)
-- `community.mongodb` required when `mongodb_security_authorization: enable`, [see detail below](#user-creation-variables)
+- `community.general.yum_versionlock` required when targeting CentOS & RHEL host.
+- `community.mongodb` required when `mongodb_security_authorization: enable`, [see detail below](#user-creation-variables).
 
   ```bash
   ansible-galaxy collection install community.general community.mongodb
