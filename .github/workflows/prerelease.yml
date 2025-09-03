@@ -1,0 +1,26 @@
+name: Prerelease
+on:
+  pull_request:
+    branches: [main]
+    types: [closed]
+    paths-ignore:
+      - "**.md"
+      - "LICENSE"
+  release:
+    types: [prereleased]
+  workflow_dispatch:
+    inputs:
+      manual_deploy:
+        description: "deploy to ansible galaxy dev"
+        default: false
+        required: true
+        type: boolean
+
+jobs:
+  deploy:
+    if: ${{ github.event.pull_request.merged == true || (github.event_name == 'release' && github.event.action == 'published') || inputs.manual_deploy }}
+    uses: trfore/ansible-role/.github/workflows/deploy_ansible_galaxy.yml@main # remote repo
+    with:
+      GALAXY_API_URL: "https://galaxy-dev.ansible.com/"
+    secrets:
+      API_KEY: ${{ secrets.GALAXY_DEV_API_KEY }}
