@@ -117,6 +117,11 @@ git commit -m 'feature: ...'
 git push ...
 ```
 
+## Prereleases & Releases
+- Pushes to the main branch or creating a prerelease will automatically push to Galaxy's development server,
+  <https://galaxy-dev.ansible.com/ui/standalone/roles/trfore/mongodb_install/>.
+- Releases are pushed to Galaxy when a new GitHub release is published.
+
 ## Additional References
 
 - [Ansible community guide](https://docs.ansible.com/ansible/devel/community/index.html)
