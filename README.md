@@ -1,7 +1,8 @@
 # Ansible Role: mongodb_install
 
 [![CI](https://github.com/trfore/ansible-role-mongodb-install/actions/workflows/ci.yml/badge.svg)](https://github.com/trfore/ansible-role-mongodb-install/actions/workflows/ci.yml)
-[![CD](https://github.com/trfore/ansible-role-mongodb-install/actions/workflows/cd.yml/badge.svg)](https://github.com/trfore/ansible-role-mongodb-install/actions/workflows/cd.yml)
+[![Prerelease](https://github.com/trfore/ansible-role-mongodb-install/actions/workflows/prerelease.yml/badge.svg)](https://github.com/trfore/ansible-role-mongodb-install/actions/workflows/prerelease.yml)
+[![Release](https://github.com/trfore/ansible-role-mongodb-install/actions/workflows/release.yml/badge.svg)](https://github.com/trfore/ansible-role-mongodb-install/actions/workflows/release.yml)
 
 This role installs the MongoDB Community edition server metapackage, `mongodb-org`, via the OS's package manager. It currently defaults to installing the **latest release from version 7**, you can install a newer major version by setting `mongodb_version: 8.0.13`, see 'Tested Platforms and Versions' section for a compatibility matrix.
 
