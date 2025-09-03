@@ -1,11 +1,5 @@
 name: Prerelease
 on:
-  pull_request:
-    branches: [main]
-    types: [closed]
-    paths-ignore:
-      - "**.md"
-      - "LICENSE"
   release:
     types: [prereleased]
   workflow_dispatch:
