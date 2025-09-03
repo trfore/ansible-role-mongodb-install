@@ -12,7 +12,7 @@ on:
 
 jobs:
   deploy:
-    if: ${{ github.event.pull_request.merged == true || (github.event_name == 'release' && github.event.action == 'published') || inputs.manual_deploy }}
+    if: ${{ github.event.action == 'prereleased' || inputs.manual_deploy }}
     uses: trfore/ansible-role/.github/workflows/deploy_ansible_galaxy.yml@main # remote repo
     with:
       GALAXY_API_URL: "https://galaxy-dev.ansible.com/"
