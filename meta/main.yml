@@ -20,5 +20,3 @@ galaxy_info:
 
 dependencies:
   []
-  # - role: community.general
-  #   version: ">=6.0.0"
