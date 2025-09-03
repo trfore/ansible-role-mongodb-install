@@ -1,3 +1,7 @@
 ---
-- src: https://github.com/ansible-collections/community.general
-- src: https://github.com/ansible-collections/community.mongodb
+collections:
+  - name: community.general
+    source: https://galaxy.ansible.com
+
+  - name: community.mongodb
+    source: https://galaxy.ansible.com
