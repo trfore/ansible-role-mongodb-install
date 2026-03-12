@@ -2,7 +2,9 @@
 [Unit]
 Description="Disable Transparent Hugepage before MongoDB boots"
 
-Before={{ mongodb_daemon_name }}.service
+DefaultDependencies=no
+After=sysinit.target local-fs.target
+Before=mongod.service
 
 [Service]
 Type=oneshot
@@ -12,4 +14,4 @@ ExecStart=-/bin/bash -c 'echo 0 > /sys/kernel/mm/transparent_hugepage/khugepaged
 
 [Install]
 
-RequiredBy={{ mongodb_daemon_name }}.service
+WantedBy=basic.target
