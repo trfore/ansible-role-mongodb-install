@@ -4,7 +4,7 @@
 [![Prerelease](https://github.com/trfore/ansible-role-mongodb-install/actions/workflows/prerelease.yml/badge.svg)](https://github.com/trfore/ansible-role-mongodb-install/actions/workflows/prerelease.yml)
 [![Galaxy Release](https://github.com/trfore/ansible-role-mongodb-install/actions/workflows/release.yml/badge.svg)](https://github.com/trfore/ansible-role-mongodb-install/actions/workflows/release.yml)
 
-This role installs the MongoDB Community edition server metapackage, `mongodb-org`, via the OS's package manager. It currently defaults to installing the **latest release from version 7**, you can install a newer major version by setting `mongodb_version: 8.0.21`, see 'Tested Platforms and Versions' section for a compatibility matrix.
+This role installs the MongoDB Community edition server metapackage, `mongodb-org`, via the OS's package manager. It currently defaults to installing the **latest release from version 7**, you can install a newer major version by setting `mongodb_version: 8.0.23`, see 'Tested Platforms and Versions' section for a compatibility matrix.
 
 See [Example Playbooks](#example-playbooks) for working examples. **The default settings do not configure the server**, it uses the default configuration values and minimal recommended `ulimit` settings. Its recommended to configure the server for production use, for details see: https://www.mongodb.com/docs/manual/administration/production-notes/
 
@@ -36,13 +36,13 @@ collections:
 
 ## Tested Platforms and Versions
 
-### MongoDB Community `8.0.21`
+### MongoDB Community `8.0.23`
 
 - CentOS Stream 9
 - Debian 12
 - Ubuntu 22.04 & 24.04
 
-### MongoDB Community `7.0.32`
+### MongoDB Community `7.0.34`
 
 - CentOS Stream 9
 - Debian 11 & 12
@@ -87,7 +87,7 @@ Common variables are listed below, along with default values (see `defaults/main
 
 | Variable                                   | Default    | Description                                                                                               | Required  |
 | ------------------------------------------ | ---------- | --------------------------------------------------------------------------------------------------------- | --------- |
-| mongodb_version                            | `7.0.32`   | MongoDB Community stable releases `v4.4`, `v5`, `v6`, `v7`, `v8`                                          | No        |
+| mongodb_version                            | `7.0.34`   | MongoDB Community stable releases `v4.4`, `v5`, `v6`, `v7`, `v8`                                          | No        |
 | mongodb_version_maj                        | Automatic  | Extracts major value from `mongodb_version`                                                               | Automatic |
 | mongodb_version_maj_minor                  | Automatic  | Extracts major and minor values from `mongodb_version`                                                    | Automatic |
 | mongodb_transparent_hugepages_optimization | `false`    | Disable Transparent HugePages (THP) for MongoDB ≤ 7 or enable Transparent HugePages (THP) for MongoDB ≥ 8 | No        |
@@ -163,7 +163,7 @@ Set these to automatically create users during provisioning. If `mongodb_securit
 - hosts: servers
   become: true
   vars:
-    mongodb_version: "8.0.21"
+    mongodb_version: "8.0.23"
   roles:
     - name: Install MongoDB
       role: trfore.mongodb_install
@@ -176,8 +176,8 @@ Set these to automatically create users during provisioning. If `mongodb_securit
   become: true
   vars:
     hostname: "mongodb-test"
-    mongodb_version: "8.0.21"
-    mongodb_net_bindip: "127.0.32.1"
+    mongodb_version: "8.0.23"
+    mongodb_net_bindip: "127.0.34.1"
     mongodb_net_port: "27017"
 
     mongodb_user_admin_name: main-admin
